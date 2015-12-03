@@ -5,4 +5,4 @@ read msgGit
 
 git add .
 git commit -m `echo "$msgGit"`
-git push origin master 
+git push origin master "Jpolo00" "123asdfg"
