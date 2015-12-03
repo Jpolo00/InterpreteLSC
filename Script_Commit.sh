@@ -4,5 +4,6 @@ echo "Mensaje del Commit: "
 read msgGit
 
 git add .
+git state
 git commit -m `echo "$msgGit"`
-git push origin master "Jpolo00" "123asdfg"
+git push origin master
