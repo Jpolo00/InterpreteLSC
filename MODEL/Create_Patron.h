@@ -19,8 +19,8 @@ class Create_Patron
         Create_Patron();
         ~Create_Patron();
 
-        void setNumVectors();
-        void addVectors();
+        void setNumVectors(int num);
+        void addVectors(vector<double> patron);
         void createPattern();
 };
 #endif
