@@ -3,8 +3,8 @@ echo -e "\n\n\e[1;32mScript Commit, para facilitarnos la vida"
 echo -e "Creado por: Jp\e[0m"
 
 echo -e "\e[1;31mArchivos Modificados:\e[0m"
-git add .
 git pull
+git add -A .
 git status
 
 echo -e "\e[1;32mListo para el Commit\e[0m"
