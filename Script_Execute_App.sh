@@ -4,8 +4,6 @@ echo -e "ya tiene todas las clases y carpetas incluidas"
 echo -e "ademas del OpenCV"
 echo -e "Creado por: Jp\e[0m"
 
-echo -e "\e[1;31mBorrando app"
-rm -f app
 echo -e "\e[1;32mCompilando \e[0m"
  g++ -I/usr/local/include/opencv \
      -I/usr/local/include/opencv2 \
@@ -18,4 +16,6 @@ echo -e "\e[1;32mCompilando \e[0m"
                        
 echo -e "\e[1;32mEjecutando\e[0m"
 ./app
-echo -e "\e[1;31mEjecucion Finalizada...\e[0m"
+echo -e "\e[1;32mEjecucion Finalizada...\e[0m"
+echo -e "\e[1;31mBorrando app"
+rm -f app
