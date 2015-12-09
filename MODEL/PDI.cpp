@@ -27,6 +27,12 @@ void PDI::setCaliber(int brightness,
     this->gamma = gamma;
 }
 
+Mat PDI::convertColorSpace(Mat img)
+{
+    cvtColor(img, img.clone(), CV_BGR2HSV);
+    return img;
+}
+
 Mat PDI::preImprovement(Mat img)
 {
     Mat tmp;
@@ -45,5 +51,24 @@ Mat PDI::preImprovement(Mat img)
     //Brightness  & Contrast
     tmp.convertTo(tmp.clone(), -1, contrast, brightness);
 
+    //Gaussian Blur
+    GaussianBlur(src, src, Size(3, 3), 1.0);
+
     return tmp;
 }
+
+Mat PDI::secImprovement(Mat img)
+{
+
+}
+
+/*Mat PDI::segmentation(Mat img)
+{
+
+}
+
+vector<double> PDI::characteristic(Mat img)
+{
+
+}
+*/

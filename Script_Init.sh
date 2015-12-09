@@ -9,8 +9,10 @@ git clone $repo
 
 echo -e "\e[1;32mRepositorio Clonado\e[0m"
 echo -e "Configurando GitHub"
-echo -e "<user> <email>"
-read user email
+echo -e "Usuario Git:"
+read user
+echo -e "Email:"
+email
 
 git config --global --replace-all user.name "$user"
 git config --global --replace-all user.email "$email"
