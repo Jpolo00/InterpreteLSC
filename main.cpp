@@ -16,20 +16,13 @@ int main(int argc, char const *argv[])
 {
     //   +-----------------------------------------------+
     //   |Usa este main para todas las pruebas que decees|
+    //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    cout << "All alright" << endl;
-
-    Manager_File managerFile;
-
-    vector<string> data(5);
-    data[0] = "Hola";
-    data[1] = "1";
-    data[2] = "2";
-    data[3] = "4";
-    data[4] = "5.334";
-
-    managerFile.createFile("prueba.txt", "Prueba/", data);
-    cout << managerFile.loadFile("prueba.txt", "Prueba/")[0] << endl;
+    Mat img = imread("imgTest.png");
+    PDI pdi(80, 1.2, 0.2);
+    imshow("Original", img);
+    imshow("Test", pdi.preImprovement(img));
+    waitKey(0);
     return 0;
 }
