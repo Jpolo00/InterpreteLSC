@@ -1,20 +1,7 @@
 #include "Manager_File.h"
 
-Manager_File::Manager_File()
-{
-    path = "";
-}
+Manager_File::Manager_File(){}
 Manager_File::~Manager_File(){}
-
-void Manager_File::setPath(string path)
-{
-    this->path = path;
-}
-
-string Manager_File::getPath()
-{
-    return path;
-}
 
 void Manager_File::createFile(string name, 
                               string path, 
@@ -58,6 +45,3 @@ vector<string> Manager_File::loadFile(string name, string path)
 
     return data;
 }
-
-
-
