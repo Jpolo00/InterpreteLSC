@@ -1,13 +1,23 @@
+//Librerias Nativas
 #include <iostream>
 #include <string>
 #include <vector>
 
+//Otras Librerias
+#include <cv.h>
+#include <opencv2/opencv.hpp>
+
 #include "MODEL/Manager_File.h"
+#include "MODEL/PDI.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    //   +-----------------------------------------------+
+    //   |Usa este main para todas las pruebas que decees|
+    //   +-----------------------------------------------+
+
     cout << "All alright" << endl;
 
     Manager_File managerFile;
