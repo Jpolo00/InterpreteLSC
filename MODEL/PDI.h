@@ -16,6 +16,8 @@ class PDI
         int brightness;
         double contrast;
         double gamma;
+        Mat groupRang(vector<Mat> colorRang);
+        vector<Mat> groupRangColor(Mat img, vector<vector<Scalar> > color);
     public:
         PDI();
         PDI(int brightness,

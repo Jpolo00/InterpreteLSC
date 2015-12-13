@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    Mat img = imread("tonos.png");
+    Mat img = imread("test.jpg");
     imshow("Original", img);
 
     Mat tmp;

@@ -55,7 +55,6 @@ Mat PDI::preImprovement(Mat img)
     return tmp;
 }
 
-
 Mat PDI::secImprovement(Mat img)
 {
     Mat tmp;
@@ -65,15 +64,23 @@ Mat PDI::secImprovement(Mat img)
     return tmp;
 }
 
+//Segmentation ############################################
 Mat PDI::segmentation(Mat img)
 {
     Mat tmp;
     Mat element;
+    vector<Mat> tmpRang;
 
-    Scalar color1 = Scalar(0, 10, 60);
-    Scalar color2 = Scalar(20, 150, 255);
+    //Initializer Colors for Range
+    vector <vector <Scalar> > color(2);
+    color[0].push_back(Scalar(0, 100, 100));
+    color[0].push_back(Scalar(10, 255, 255));
 
-    inRange(img, color1, color2, tmp);
+    color[1].push_back(Scalar(160, 100, 100));
+    color[1].push_back(Scalar(179, 255, 255));
+
+    tmpRang = groupRangColor(img, color);
+    tmp = groupRang(tmpRang);
 
     element = getStructuringElement(2, Size(25, 25), Point(2, 2));
 
@@ -83,6 +90,37 @@ Mat PDI::segmentation(Mat img)
 
     return tmp;
 }
+
+Mat PDI::groupRang(vector<Mat> colorRang)
+{
+    size_t size = colorRang.size() - 1;
+    Mat tmp;
+
+    for (size_t i = 0; i < size; i++)
+    {
+        //Do the group of different color rang in one image
+        addWeighted(colorRang[i], 1.0, 
+                    colorRang[i + 1], 1.0, 
+                    0.0, tmp);
+        colorRang[i + 1] = tmp;
+    }
+
+    return tmp;
+}
+
+vector<Mat> PDI::groupRangColor(Mat img, vector<vector<Scalar> > color)
+{
+    vector<Mat> tmp(color.size());
+
+    for (size_t i = 0; i < tmp.size(); i++)
+    {
+        //Save different color rang, segmentation for color hsv
+        inRange(img, color[i][0], color[i][1], tmp[i]);
+    }
+
+    return tmp;
+}
+//##########################################################
 
 vector<double> PDI::characteristic(Mat img)
 {
