@@ -19,10 +19,19 @@ int main(int argc, char const *argv[])
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    Mat img = imread("imgTest.png");
-    PDI pdi(80, 1.2, 0.2);
+    Mat img = imread("imgTest.jpg");
     imshow("Original", img);
-    imshow("Test", pdi.preImprovement(img));
+
+    Mat tmp;
+
+    PDI pdi(30, 1.0, 1.0);
+
+    tmp =  pdi.preImprovement(img);
+    imshow("Test", tmp);
+
+    vector<double> array = pdi.characteristic(tmp);
+    cout << array[1] << endl;
+
     waitKey(0);
     return 0;
 }

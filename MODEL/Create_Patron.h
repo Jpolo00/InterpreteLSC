@@ -13,7 +13,7 @@ class Create_Patron
 {
     private:
         int numVectors;
-        vectors <vector<double>>;
+        vector<vector<double> > sinNombre;
 
     public:
         Create_Patron();

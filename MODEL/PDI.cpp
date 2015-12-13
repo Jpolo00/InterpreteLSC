@@ -52,23 +52,46 @@ Mat PDI::preImprovement(Mat img)
     tmp.convertTo(tmp.clone(), -1, contrast, brightness);
 
     //Gaussian Blur
-    GaussianBlur(src, src, Size(3, 3), 1.0);
+    GaussianBlur(tmp, tmp.clone(), Size(3, 3), 1.0);
 
     return tmp;
 }
 
+/*
 Mat PDI::secImprovement(Mat img)
 {
 
 }
 
-/*Mat PDI::segmentation(Mat img)
+Mat PDI::segmentation(Mat img)
 {
 
-}
+}*/
 
 vector<double> PDI::characteristic(Mat img)
 {
+    double arrayMomentsHU[7];
+    vector<double> array(7);
 
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+
+    Mat tmp;
+
+    Canny(img, tmp, 50, 200, 3);
+    findContours(tmp, contours, 
+                      hierarchy, 
+                      CV_RETR_TREE, 
+                      CV_CHAIN_APPROX_SIMPLE, 
+                      Point(0, 0));
+
+    Moments mnts = moments(contours[0]);
+    HuMoments(mnts, arrayMomentsHU);
+
+    for (size_t i = 0; i < 7; i++)
+    {
+        array[i] = arrayMomentsHU[i];
+    }
+
+    return array;
 }
-*/

@@ -15,7 +15,7 @@ echo -e "\e[1;32mCompilando \e[0m"
                        -lopencv_legacy -lopencv_stitching
                        
 echo -e "\e[1;32mEjecutando\e[0m"
-./app
+ ./app
 echo -e "\e[1;32mEjecucion Finalizada...\e[0m"
-echo -e "\e[1;31mBorrando app"
-rm -f app
+#echo -e "\e[1;31mBorrando app"
+#rm -f app
