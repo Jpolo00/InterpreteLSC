@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    Mat img = imread("imgTest.jpg");
+    Mat img = imread("tonos.png");
     imshow("Original", img);
 
     Mat tmp;
@@ -29,8 +29,12 @@ int main(int argc, char const *argv[])
     tmp =  pdi.preImprovement(img);
     imshow("Test", tmp);
 
-    vector<double> array = pdi.characteristic(tmp);
-    cout << array[1] << endl;
+    tmp = pdi.convertColorSpace(tmp);
+    tmp =  pdi.secImprovement(tmp);
+
+    imshow("Test2", tmp);
+    tmp = pdi.segmentation(tmp);
+    imshow("Test3", tmp);
 
     waitKey(0);
     return 0;

@@ -29,8 +29,9 @@ void PDI::setCaliber(int brightness,
 
 Mat PDI::convertColorSpace(Mat img)
 {
-    cvtColor(img, img.clone(), CV_BGR2HSV);
-    return img;
+    Mat tmp;
+    cvtColor(img, tmp, CV_BGR2HSV);
+    return tmp;
 }
 
 Mat PDI::preImprovement(Mat img)
@@ -51,22 +52,37 @@ Mat PDI::preImprovement(Mat img)
     //Brightness  & Contrast
     tmp.convertTo(tmp.clone(), -1, contrast, brightness);
 
-    //Gaussian Blur
-    GaussianBlur(tmp, tmp.clone(), Size(3, 3), 1.0);
+    return tmp;
+}
+
+
+Mat PDI::secImprovement(Mat img)
+{
+    Mat tmp;
+
+    GaussianBlur(img, tmp, Size(3, 3), 1.0);
 
     return tmp;
 }
 
-/*
-Mat PDI::secImprovement(Mat img)
-{
-
-}
-
 Mat PDI::segmentation(Mat img)
 {
+    Mat tmp;
+    Mat element;
 
-}*/
+    Scalar color1 = Scalar(0, 10, 60);
+    Scalar color2 = Scalar(20, 150, 255);
+
+    inRange(img, color1, color2, tmp);
+
+    element = getStructuringElement(2, Size(25, 25), Point(2, 2));
+
+    dilate(tmp, tmp.clone(), element);
+    erode(tmp, tmp.clone(), element);
+    medianBlur(tmp, tmp.clone(), 11);
+
+    return tmp;
+}
 
 vector<double> PDI::characteristic(Mat img)
 {
