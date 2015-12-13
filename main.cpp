@@ -12,7 +12,8 @@
 
 using namespace std;
 
-int main(int argc, char const *argv[])
+//int main(int argc, char const *argv[])
+int main()
 {
     //   +-----------------------------------------------+
     //   |Usa este main para todas las pruebas que decees|
