@@ -20,7 +20,7 @@ int main()
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    Mat img = imread("test.jpg");
+    Mat img = imread("tonos.png");
     imshow("Original", img);
 
     Mat tmp;
