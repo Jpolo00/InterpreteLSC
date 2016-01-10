@@ -13,17 +13,39 @@ using namespace cv;
 class PDI
 {
     private:
+        //Control Scene
         int brightness;
         double contrast;
         double gamma;
-        Mat groupRang(vector<Mat> colorRang);
-        vector<Mat> groupRangColor(Mat img, vector<vector<Scalar> > color);
+        Mat tmp;
+
+        //Erode & Dilate SEGMENTATION
+        Mat element = getStructuringElement(2, Size(25, 25), Point(2, 2)); //Option 1
+        //Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); //Option 2
+
+        //Color for inRang SEGMENTATION
+        size_t sizeMatColorRang = 1;
+        Mat matColorRang[1];
+        size_t sizeColorRang = 2;
+        Scalar colorRang[2] = {Scalar(0, 0, 45), Scalar(25, 160, 245)}; //Color Rang 1
+        Mat groupColorRang(Mat img);
+
+        //Get Characteristic
+        vector<vector<Point> > contours;
+        vector<Vec4i> hierarchy;
+        Moments mnts;
+
     public:
+        //CONSTRUCTORS
         PDI();
         PDI(int brightness,
             double contrast,
             double gamma);
+
+        //DESTROLLER
         ~PDI();
+
+        //FUNCTIONS
         void setCaliber(int brightness,
                         double contrast,
                         double gamma);

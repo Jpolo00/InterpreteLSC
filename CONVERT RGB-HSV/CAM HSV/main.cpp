@@ -39,16 +39,17 @@ using namespace std;
     while (true)
     {
         //DESCOMENTAR PARA USAR IMAGEN
-        Mat imgOriginal = imread("tonos.png");
+        // Mat imgOriginal = imread("tonos.png");
 
         //DESCOMENTAR PARA VER LA WEBCAM
-        // bool bSuccess = cap.read(imgOriginal); // read a new frame from video
+        Mat imgOriginal;
+        bool bSuccess = cap.read(imgOriginal); // read a new frame from video
 
-        //  if (!bSuccess) //if not success, break loop
-        // {
-        //      cout << "Cannot read a frame from video stream" << endl;
-        //      break;
-        // }
+         if (!bSuccess) //if not success, break loop
+        {
+             cout << "Cannot read a frame from video stream" << endl;
+             break;
+        }
 
     Mat imgHSV;
 
