@@ -64,14 +64,39 @@ Mat PDI::secImprovement(Mat img)
 
 Mat PDI::segmentation(Mat img)
 {
+    double arrayMomentsHU[7];
+    vector<double> array(7);
+
     tmp = groupColorRang(img);
 
-    // dilate(tmp, tmp.clone(), element);
-    // erode(tmp, tmp.clone(), element);
+    //:3
+
+    dilate(tmp, tmp.clone(), element);
+    erode(tmp, tmp.clone(), element);
 
     medianBlur(tmp, tmp.clone(), 11);
+    GaussianBlur( tmp, tmp.clone(), Size(5, 5), 5, 10);
 
-    return tmp;
+    imshow("Test1", tmp);
+
+    Canny(img, tmp, 150, 255, 3);
+    imshow("Test2", tmp);
+    findContours(tmp, contours, 
+                      hierarchy, 
+                      CV_RETR_TREE, 
+                      CV_CHAIN_APPROX_SIMPLE, 
+                      Point(0, 0));
+
+    Mat drawing = Mat::zeros(tmp.size(), CV_8UC3 );
+
+    for(size_t i = 0; i< contours.size(); i++)
+    {
+        cout << contourArea(contours[i],false) << "\t" <<arcLength(contours[i], true)<< endl;
+        drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point());
+    }
+
+    imshow("Test", drawing);
+    return drawing;
 }
 
 Mat PDI::groupColorRang(Mat img)

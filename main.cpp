@@ -56,7 +56,6 @@ int main()
         tmp =  pdi.secImprovement(tmp);
 
         tmp = pdi.segmentation(tmp);
-        pdi.characteristic(tmp);
         //imshow("Test", tmp);
 
         if(waitKey(1) >= 0)
@@ -66,7 +65,7 @@ int main()
 
         finish = clock();
 
-        cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
+        //cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
     }
 
     return 0;

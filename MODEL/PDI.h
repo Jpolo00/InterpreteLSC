@@ -20,8 +20,8 @@ class PDI
         Mat tmp;
 
         //Erode & Dilate SEGMENTATION
-        Mat element = getStructuringElement(2, Size(25, 25), Point(2, 2)); //Option 1
-        //Mat element = getStructuringElement(MORPH_ELLIPSE, Size(3, 3)); //Option 2
+        //Mat element = getStructuringElement(MORPH_CROSS, Size(25, 25), Point(2, 2)); //Option 1
+        Mat element = getStructuringElement(MORPH_ELLIPSE, Size(7, 7)); //Option 2
 
         //Color for inRang SEGMENTATION
         size_t sizeMatColorRang = 1;
