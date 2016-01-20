@@ -14,6 +14,7 @@ class Create_Patron
     private:
         int numVectors;
         vector<vector<double> > sinNombre;
+        vector<double> patron;
 
     public:
         Create_Patron();
