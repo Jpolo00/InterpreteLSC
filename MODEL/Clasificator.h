@@ -6,14 +6,16 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <math.h>
 
 using namespace std;
 
 class Clasificator
 {
 	private:
-			Manager_File manager;
-			vector<string> patron;
+			
+			vector<double> distEuclidiana;
+			
 
 	public:
 		Clasificator();
