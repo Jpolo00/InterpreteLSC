@@ -16,6 +16,7 @@ class Clasificator
 			
 			vector<double> distEuclidiana;
 			
+			
 
 	public:
 		Clasificator();
@@ -23,7 +24,7 @@ class Clasificator
 
         int distanciaMinima(vector<double> distancia);
         string getCaracter(vector<string> caracterPatron, int item);
-        vector<double> distanciaEuclidiana(vector<double> caracteristicas, vetor<double> modelo);
+        void distanciaEuclidiana(vector<double> caracteristicas, vetor<double> modelo);
 
 };
 
