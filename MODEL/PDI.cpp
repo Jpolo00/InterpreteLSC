@@ -94,6 +94,8 @@ Mat PDI::segmentation(Mat img)
                       CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
 
+    characteristic(contours);
+
     Mat drawing = Mat::zeros(tmp.size(), CV_8UC3 );
 
     for(size_t i = 0; i< contours.size(); i++)
@@ -139,9 +141,10 @@ vector<double> PDI::characteristic(vector<vector<Point> > contours)
         mnts = moments(contours[i]);
         HuMoments(mnts, arrayMomentsHU);
 
+        cout << "Contorno " << i << "-------------------" << endl;
         for (size_t i = 0; i < 7; i++)
         {
-            cout << arrayMomentsHU[i] << endl;;
+            cout << arrayMomentsHU[i] << endl;
         }
     }
 
