@@ -7,8 +7,6 @@ Usado
 * Qt 5.5
 
 Plataforma
-<> Linux - LinuxMint 17.1
-*
-1)
-[2]
+* Linux - LinuxMint 17.1
+
 
