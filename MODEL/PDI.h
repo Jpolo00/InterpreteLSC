@@ -54,6 +54,6 @@ class PDI
         Mat preImprovement(Mat img);
         Mat secImprovement(Mat img);
         Mat segmentation(Mat img);
-        vector<double> characteristic(Mat img);
+        vector<double> characteristic(vector<vector<Point> > contours);
 };
 #endif

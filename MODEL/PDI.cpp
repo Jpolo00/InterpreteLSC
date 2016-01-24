@@ -90,7 +90,7 @@ Mat PDI::segmentation(Mat img)
 
     findContours(tmp, contours, 
                       hierarchy, 
-                      CV_RETR_CCOMP, //CV_RETR_TREE, 
+                      CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
                       CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
 
@@ -100,7 +100,7 @@ Mat PDI::segmentation(Mat img)
     {
         if (arcLength( contours[i], true ) > 100.0)
         {
-            drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point());
+            drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point(0, 0));
         }
     }
 
@@ -129,25 +129,27 @@ Mat PDI::groupColorRang(Mat img)
     return tmp;
 }
 
-vector<double> PDI::characteristic(Mat img)
+vector<double> PDI::characteristic(vector<vector<Point> > contours)
 {
     double arrayMomentsHU[7];
     vector<double> array(7);
-    Canny(img, tmp, 50, 200, 3);
-    imshow("Test", tmp);
-    findContours(tmp, contours, 
-                      hierarchy, 
-                      CV_RETR_TREE, 
-                      CV_CHAIN_APPROX_SIMPLE, 
-                      Point(0, 0));
 
-    mnts = moments(contours[0]);
-    HuMoments(mnts, arrayMomentsHU);
-
-    for (size_t i = 0; i < 7; i++)
+    for(size_t i = 0; i < contours.size(); i++)
     {
-        array[i] = arrayMomentsHU[i];
+        mnts = moments(contours[i]);
+        HuMoments(mnts, arrayMomentsHU);
+
+        for (size_t i = 0; i < 7; i++)
+        {
+            cout << arrayMomentsHU[i] << endl;;
+        }
     }
+
+
+    // for (size_t i = 0; i < 7; i++)
+    // {
+    //     array[i] = arrayMomentsHU[i];
+    // }
 
     return array;
 }
