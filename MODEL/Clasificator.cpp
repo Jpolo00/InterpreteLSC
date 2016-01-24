@@ -1,14 +1,15 @@
-#include "clasificator.h"
+//Comentado porque no me dejo compilar :3, perdon Kelly :3
+/*#include "Clasificator.h"
 
-clasificator::clasificator(){}
-clasificator::~clasificator(){}
+Clasificator::Clasificator(){}
+Clasificator::~Clasificator(){}
 
-void Clasificator::distanciaEuclidiana(vector<double> caracteristicas, vetor<double> modelo){
+void Clasificator::distanciaEuclidiana(vector<double> caracteristicas, vector<double> modelo){
 		
 		double temp=0.0;
 		for (int i = 0; i < caracteristicas.size(); i++)
 		{	
-			temp += pow(caracteristicas[i]-modelo[i],2);
+			temp += pow(caracteristicas[i]- modelo[i],2);
 			
 		}
 		distEuclidiana.push_back(sqrt(temp));
@@ -20,9 +21,9 @@ int Clasificator::distanciaMinima(vector<double> distancia){
 
 	for (int i = 1; i < distancia.size(); i++){
 
-		if (distMinima>distancia[i])
+		if (distMinima > distancia[i])
 		{
-			distMinima=distancia[i];
+			distMinima = distancia[i];
 			posicion=i;
 		}else{
 			posicion=0;
@@ -32,7 +33,7 @@ int Clasificator::distanciaMinima(vector<double> distancia){
 	return posicion;
 }
 
-String Clasificator::getCaracter(vector<string> caracterPatron, int item){
+string Clasificator::getCaracter(vector<string> caracterPatron, int item){
 	string letra = caracterPatron[item];
 	return letra;
-} 
+} */

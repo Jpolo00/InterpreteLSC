@@ -23,13 +23,12 @@ int main()
     Mat img;
     Mat tmp;
     
-    VideoCapture cap(0);
+    VideoCapture cap(1);
 
     cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
 
     PDI pdi(30, 1.0, 1.0);
-
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
@@ -46,7 +45,7 @@ int main()
         now = clock();
 
         cap >> img;
-        imshow("Original", img);
+        //imshow("Original", img);
 
         pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
         tmp =  pdi.preImprovement(img);
@@ -56,7 +55,7 @@ int main()
         tmp =  pdi.secImprovement(tmp);
 
         tmp = pdi.segmentation(tmp);
-        //imshow("Test", tmp);
+        imshow("Test", tmp);
 
         if(waitKey(1) >= 0)
         {
@@ -65,7 +64,7 @@ int main()
 
         finish = clock();
 
-        //cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
+        cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
     }
 
     return 0;

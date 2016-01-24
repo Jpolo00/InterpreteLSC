@@ -68,31 +68,40 @@ Mat PDI::segmentation(Mat img)
     vector<double> array(7);
 
     tmp = groupColorRang(img);
+    threshold(tmp, tmp2, 128, 255, THRESH_BINARY_INV);
 
-    //:3
+    tmp = tmp2;
 
-    dilate(tmp, tmp.clone(), element);
-    erode(tmp, tmp.clone(), element);
+    erode(tmp, tmp2, element);
+    tmp = tmp2;
 
-    medianBlur(tmp, tmp.clone(), 11);
-    GaussianBlur( tmp, tmp.clone(), Size(5, 5), 5, 10);
+    dilate(tmp, tmp2, element);
+    tmp = tmp2;
 
-    imshow("Test1", tmp);
+    medianBlur(tmp, tmp2, 3);
+    GaussianBlur(tmp2, tmp, Size(5, 5), 5, 10);
 
-    Canny(img, tmp, 150, 255, 3);
-    imshow("Test2", tmp);
+    imshow("Test1", tmp2);
+
+    Canny(tmp, tmp2, 200, 255, 3);
+    tmp = tmp2;
+
+    imshow("Test2", tmp2);
+
     findContours(tmp, contours, 
                       hierarchy, 
-                      CV_RETR_TREE, 
-                      CV_CHAIN_APPROX_SIMPLE, 
+                      CV_RETR_CCOMP, //CV_RETR_TREE, 
+                      CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
 
     Mat drawing = Mat::zeros(tmp.size(), CV_8UC3 );
 
     for(size_t i = 0; i< contours.size(); i++)
     {
-        cout << contourArea(contours[i],false) << "\t" <<arcLength(contours[i], true)<< endl;
-        drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point());
+        if (arcLength( contours[i], true ) > 100.0)
+        {
+            drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point());
+        }
     }
 
     imshow("Test", drawing);

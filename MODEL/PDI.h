@@ -18,6 +18,7 @@ class PDI
         double contrast;
         double gamma;
         Mat tmp;
+        Mat tmp2;
 
         //Erode & Dilate SEGMENTATION
         //Mat element = getStructuringElement(MORPH_CROSS, Size(25, 25), Point(2, 2)); //Option 1
