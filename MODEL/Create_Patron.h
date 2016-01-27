@@ -13,14 +13,14 @@ class Create_Patron
 {
     private:
         int numVectors;
+        string letter;
         vector<vector<double> > sinNombre;
         vector<double> patron;
 
     public:
-        Create_Patron();
+        Create_Patron(int numVectors, string letter);
         ~Create_Patron();
 
-        void setNumVectors(int num);
         void addVectors(vector<double> patron);
         void createPattern();
 };
