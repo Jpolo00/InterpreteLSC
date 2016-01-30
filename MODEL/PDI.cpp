@@ -62,31 +62,38 @@ Mat PDI::secImprovement(Mat img)
     return tmp;
 }
 
-Mat PDI::segmentation(Mat img)
+//Mat PDI::segmentation(Mat img)
+Mat PDI::segmentation(Mat img, vector<vector<Point> > contoursA)
 {
     double arrayMomentsHU[7];
     vector<double> array(7);
 
     tmp = groupColorRang(img);
-    threshold(tmp, tmp2, 128, 255, THRESH_BINARY_INV);
-
-    tmp = tmp2;
-
-    erode(tmp, tmp2, element);
+    threshold(tmp, tmp2, 128, 255, THRESH_BINARY); //THRESH_BINARY_INV
     tmp = tmp2;
 
     dilate(tmp, tmp2, element);
     tmp = tmp2;
+    erode(tmp, tmp2, element);
+    tmp = tmp2;
 
-    medianBlur(tmp, tmp2, 3);
-    GaussianBlur(tmp2, tmp, Size(5, 5), 5, 10);
+    imshow("Erode and Dilate", tmp);
 
-    imshow("Test1", tmp2);
+    // medianBlur(tmp, tmp2, 3);
+    // tmp = tmp2;
+
+    // GaussianBlur(tmp, tmp2, Size(5, 5), 5, 10);
+    // tmp = tmp2;
+
+    imshow("Blurs", tmp);
 
     Canny(tmp, tmp2, 200, 255, 3);
     tmp = tmp2;
 
-    imshow("Test2", tmp2);
+    imshow("Canny1", tmp);
+
+    contours.resize(0);
+    hierarchy.resize(0);
 
     findContours(tmp, contours, 
                       hierarchy, 
@@ -94,17 +101,37 @@ Mat PDI::segmentation(Mat img)
                       CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
 
-    characteristic(contours);
+    drawing = Mat::zeros(tmp.size(), CV_8UC3 );
+    Scalar color = Scalar(0, 255, 0);
 
-    Mat drawing = Mat::zeros(tmp.size(), CV_8UC3 );
-
-    for(size_t i = 0; i< contours.size(); i++)
+    vector<vector<Point> >hull(contours.size());
+    for( int i = 0; i < contours.size(); i++ )
     {
-        if (arcLength( contours[i], true ) > 100.0)
-        {
-            drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point(0, 0));
-        }
+        convexHull(contours[i], hull[i], false ); 
     }
+
+    for (size_t i = 0; i < contours.size(); i++)
+    {
+        if (arcLength( contours[i], true ) > 200.0)
+        {
+            if (matchShapes(contours[i], contoursA[0], CV_CONTOURS_MATCH_I3, 0) < 0.5)
+            {
+                color = Scalar(0, 0, 255);
+            }
+        }
+
+        drawContours( drawing, hull, i, Scalar(255, 0, 0), 1, 8, hierarchy, 0, Point(0, 0));
+        drawContours( drawing, contours, i, color, 1, 8, hierarchy, 0, Point(0, 0));
+    }
+
+
+    // for(size_t i = 0; i< contours.size(); i++)
+    // {
+    //     if (arcLength( contours[i], true ) > 100.0)
+    //     {
+    //         drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point(0, 0));
+    //     }
+    // }
 
     imshow("Test", drawing);
     return drawing;
@@ -133,21 +160,21 @@ Mat PDI::groupColorRang(Mat img)
 
 vector<double> PDI::characteristic(vector<vector<Point> > contours)
 {
-    double arrayMomentsHU[7];
+    //double arrayMomentsHU[7];
     vector<double> array(7);
 
-    for(size_t i = 0; i < contours.size(); i++)
+    //for(size_t i = 0; i < contours.size(); i++)
     {
-        mnts = moments(contours[i]);
-        HuMoments(mnts, arrayMomentsHU);
+        //mnts = moments(contours[i]);
+        //HuMoments(mnts, arrayMomentsHU);
 
-        cout << "Contorno " << i << "-------------------" << endl;
-        for (size_t i = 0; i < 7; i++)
+        //cout << "Contorno " << i << "-------------------" << endl;
+        //for (size_t i = 0; i < 7; i++)
         {
-            cout << arrayMomentsHU[i] << endl;
+            //cout << arrayMomentsHU[i] << endl;
+            //cout << matchShapes(contours, contoursA, CV_CONTOURS_MATCH_I3, 0) << endl;
         }
     }
-
 
     // for (size_t i = 0; i < 7; i++)
     // {

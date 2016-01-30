@@ -23,7 +23,7 @@ int main()
     Mat img;
     Mat tmp;
     
-    VideoCapture cap(1);
+    VideoCapture cap(0);
 
     cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
@@ -40,6 +40,31 @@ int main()
     cvCreateTrackbar("contrast", "Control", &contrast, 1000);
     cvCreateTrackbar("gamma", "Control", &gamma, 500);
 
+
+
+    Mat src = imread("patron.png");
+    Mat tmpA;
+    Mat tmpA2;
+    cvtColor(src, tmpA, CV_RGB2GRAY);
+    GaussianBlur(tmpA, tmpA2, Size(5, 5), 5, 10);
+    tmpA = tmpA2;
+
+    Canny(tmpA, tmpA2, 200, 255, 3);
+    tmpA = tmpA2;
+
+    imshow("TestA", tmpA);
+
+    vector<vector<Point> > contoursA;
+    vector<Vec4i> hierarchyA;
+
+    findContours(tmpA, contoursA, 
+                      hierarchyA, 
+                      CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
+                      CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
+                      Point(0, 0));
+
+
+
     while(true)
     {
         now = clock();
@@ -54,7 +79,7 @@ int main()
         tmp = pdi.convertColorSpace(tmp);
         tmp =  pdi.secImprovement(tmp);
 
-        tmp = pdi.segmentation(tmp);
+        tmp = pdi.segmentation(tmp, contoursA);
         imshow("Test", tmp);
 
         if(waitKey(1) >= 0)
