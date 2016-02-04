@@ -7,6 +7,7 @@
 #include <cv.h>
 #include <opencv2/opencv.hpp>
 
+#include "MODEL/Clasificator.h"
 #include "MODEL/Manager_File.h"
 #include "MODEL/PDI.h"
 
@@ -42,55 +43,54 @@ int main()
 
 
 
-    Mat src = imread("patron.png");
-    Mat tmpA;
-    Mat tmpA2;
-    cvtColor(src, tmpA, CV_RGB2GRAY);
-    GaussianBlur(tmpA, tmpA2, Size(5, 5), 5, 10);
-    tmpA = tmpA2;
+    // Mat src = imread("patron.png");
+    // Mat tmpA;
+    // Mat tmpA2;
+    // cvtColor(src, tmpA, CV_RGB2GRAY);
+    // GaussianBlur(tmpA, tmpA2, Size(5, 5), 5, 10);
+    // tmpA = tmpA2;
 
-    Canny(tmpA, tmpA2, 200, 255, 3);
-    tmpA = tmpA2;
+    // Canny(tmpA, tmpA2, 200, 255, 3);
+    // tmpA = tmpA2;
 
-    imshow("TestA", tmpA);
+    // imshow("TestA", tmpA);
 
-    vector<vector<Point> > contoursA;
-    vector<Vec4i> hierarchyA;
+    // vector<vector<Point> > contoursA;
+    // vector<Vec4i> hierarchyA;
 
-    findContours(tmpA, contoursA, 
-                      hierarchyA, 
-                      CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
-                      CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
-                      Point(0, 0));
+    // findContours(tmpA, contoursA, 
+    //                   hierarchyA, 
+    //                   CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
+    //                   CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
+    //                   Point(0, 0));
+    // while(true)
+    // {#include "MODEL/Manager_File.h"
+    //     now = clock();
 
+    //     cap >> img;
+    //     //imshow("Original", img);
 
+    //     pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
+    //     tmp =  pdi.preImprovement(img);
+    //     imshow("preImprovement", tmp);
 
-    while(true)
-    {
-        now = clock();
+    //     tmp = pdi.convertColorSpace(tmp);
+    //     tmp =  pdi.secImprovement(tmp);
 
-        cap >> img;
-        //imshow("Original", img);
+    //     tmp = pdi.segmentation(tmp, contoursA);
+    //     imshow("Test", tmp);
 
-        pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
-        tmp =  pdi.preImprovement(img);
-        imshow("preImprovement", tmp);
+    //     if(waitKey(1) >= 0)
+    //     {
+    //         break;
+    //     }
 
-        tmp = pdi.convertColorSpace(tmp);
-        tmp =  pdi.secImprovement(tmp);
+    //     finish = clock();
 
-        tmp = pdi.segmentation(tmp, contoursA);
-        imshow("Test", tmp);
+    //     cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
+    // }
 
-        if(waitKey(1) >= 0)
-        {
-            break;
-        }
-
-        finish = clock();
-
-        cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
-    }
+    Clasificator clasificador;
 
     return 0;
 }

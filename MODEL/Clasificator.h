@@ -1,31 +1,31 @@
 #ifndef CLASIFICATOR_H
 #define CLASIFICATOR_H
 
-#include <string>
 #include <iostream>
 #include <vector>
-#include <fstream>
-#include <sstream>
+#include <string>
+#include <stdlib.h>
 #include <math.h>
+
+#include "Manager_File.h"
 
 using namespace std;
 
 class Clasificator
 {
-	private:
-			
-			vector<double> distEuclidiana;
-			
-			
+    private:
+        vector<vector<double> > momentosHu;
+        vector<string> character;
+        vector<double> distEuclidiana;
 
-	public:
-		Clasificator();
+        Manager_File manager;
+
+    public:
+        Clasificator();
         ~Clasificator();
-
-        int distanciaMinima(vector<double> distancia);
-        string getCaracter(vector<string> caracterPatron, int item);
-        void distanciaEuclidiana(vector<double> caracteristicas, vetor<double> modelo);
-
+        // int distanciaMinima(vector<double> distancia);
+        // string getCaracter(vector<string> caracterPatron, int item);
+        // void distanciaEuclidiana(vector<double> caracteristicas, vector<double> modelo);
 };
 
 #endif

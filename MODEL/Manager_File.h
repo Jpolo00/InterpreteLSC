@@ -24,11 +24,5 @@ class Manager_File
                         vector<string> data);
 
         vector<string> loadFile(string name, string path);
-        vector<string> loadFile(string name);
-
-        void setPath(string path);
-        string getPath();
-
-        vector<string> getData();
 };
 #endif
