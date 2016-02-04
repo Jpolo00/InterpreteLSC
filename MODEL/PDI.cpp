@@ -112,6 +112,7 @@ Mat PDI::segmentation(Mat img, vector<vector<Point> > contoursA)
 
     for (size_t i = 0; i < contours.size(); i++)
     {
+        cout << matchShapes(contours[i], contoursA[0], CV_CONTOURS_MATCH_I3, 0) << endl;
         if (arcLength( contours[i], true ) > 200.0)
         {
             if (matchShapes(contours[i], contoursA[0], CV_CONTOURS_MATCH_I3, 0) < 0.5)
@@ -121,17 +122,8 @@ Mat PDI::segmentation(Mat img, vector<vector<Point> > contoursA)
         }
 
         drawContours( drawing, hull, i, Scalar(255, 0, 0), 1, 8, hierarchy, 0, Point(0, 0));
-        drawContours( drawing, contours, i, color, 1, 8, hierarchy, 0, Point(0, 0));
+        drawContours( drawing, contours, i, color, CV_FILLED, 8, hierarchy, 0, Point(0, 0));
     }
-
-
-    // for(size_t i = 0; i< contours.size(); i++)
-    // {
-    //     if (arcLength( contours[i], true ) > 100.0)
-    //     {
-    //         drawContours( drawing, contours, i, Scalar(0, 255, 0), 1, 8, hierarchy, 0, Point(0, 0));
-    //     }
-    // }
 
     imshow("Test", drawing);
     return drawing;

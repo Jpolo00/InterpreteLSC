@@ -1,10 +1,10 @@
 #include "Create_Patron.h"
 
-Create_Patron::Create_Patron(int numV, string letra)
-	this->numVectors=numVectors;
-	this->letter=letter;
-}
-Create_Patron::~Create_Patron(){}
+// Create_Patron::Create_Patron(int numV, string letra)
+// 	this->numVectors=numVectors;
+// 	this->letter=letter;
+// }
+// Create_Patron::~Create_Patron(){}
 
 
 void Create_Patron::addVectors(vector<double> patron)
