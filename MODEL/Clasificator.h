@@ -14,18 +14,20 @@ using namespace std;
 class Clasificator
 {
     private:
-        vector<vector<double> > momentosHu;
+        vector<vector<double> > momentsHu;
         vector<string> character;
-        vector<double> distEuclidiana;
+        vector<double> euclideanDist;
+        double tmp;
 
         Manager_File manager;
+
+        void distanceEuclidean(vector<vector<double> > characteristic);
 
     public:
         Clasificator();
         ~Clasificator();
-        // int distanciaMinima(vector<double> distancia);
-        // string getCaracter(vector<string> caracterPatron, int item);
-        // void distanciaEuclidiana(vector<double> caracteristicas, vector<double> modelo);
+        string distanceMin(vector<vector<double> > characteristic, 
+                           double threshold);
 };
 
 #endif

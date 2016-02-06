@@ -9,49 +9,61 @@ Clasificator::Clasificator()
 
     for (size_t i = 0; i < filesPatron.size(); i++)
     {
+        momentsHu.resize(filesPatron.size());
         dataFiles = manager.loadFile(filesPatron[i], "MODEL/PATRONES/");
-        momentosHu.resize(dataFiles.size());
 
         character.push_back(dataFiles[0]);
 
         for (size_t j = 1; j < dataFiles.size(); j++)
         {
-            momentosHu[i].push_back(atof(dataFiles[j].c_str()));
+            momentsHu[i].push_back(atof(dataFiles[j].c_str()));
         }
     }
 }
 
 Clasificator::~Clasificator(){}
 
-// void Clasificator::distanciaEuclidiana(vector<double> caracteristicas, vector<double> modelo)
-// {
-//     double tmp = 0.0;
-//     for (size_t i = 0; i < caracteristicas.size(); i++)
-//     {
-//         temp += pow(caracteristicas[i]- modelo[i],2);
-//     }
-//     distEuclidiana.push_back(sqrt(temp));
-// }
+void Clasificator::distanceEuclidean(vector<vector<double> > characteristic)
+{
+    euclideanDist.clear();
 
-// int Clasificator::distanciaMinima(vector<double> distancia){
-// 	int posicion = 0;
-// 	double distMinima = distancia[0];
+    for (size_t k = 0; k < characteristic.size(); k++)
+    {
+        for (size_t i = 0; i < momentsHu.size(); i++)
+        {
+            tmp = 0.0;
 
-// 	for (int i = 1; i < distancia.size(); i++){
+            for (size_t j = 0; j < momentsHu[i].size(); j++)
+            {
+                tmp += pow(characteristic[k][j]- momentsHu[i][j], 2);
+            }
+            euclideanDist.push_back(sqrt(tmp));
+        }
+    }
+}
 
-// 		if (distMinima > distancia[i])
-// 		{
-// 			distMinima = distancia[i];
-// 			posicion=i;
-// 		}else{
-// 			posicion=0;
-// 		}
-// 	}
+string Clasificator::distanceMin(vector<vector<double> > characteristic, 
+                                 double threshold)
+{
+    distanceEuclidean(characteristic);
 
-// 	return posicion;
-// }
+    tmp = euclideanDist[0];
+    size_t index = 0;
+    string answer = "No Found";
 
-// string Clasificator::getCaracter(vector<string> caracterPatron, int item){
-// 	string letra = caracterPatron[item];
-// 	return letra;
-// }
+    for (size_t i = 1; i < euclideanDist.size(); i++)
+    {
+        if (tmp > euclideanDist[i])
+        {
+            tmp = euclideanDist[i];
+            index = i;
+        }
+    }
+
+    if (euclideanDist[index] <= threshold)
+    {
+        answer = character[index];
+    }
+
+    return answer;
+}

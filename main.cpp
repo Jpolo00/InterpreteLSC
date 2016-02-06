@@ -7,6 +7,7 @@
 #include <cv.h>
 #include <opencv2/opencv.hpp>
 
+//Nuestras Librerias
 #include "MODEL/Clasificator.h"
 #include "MODEL/Manager_File.h"
 #include "MODEL/PDI.h"
@@ -16,69 +17,52 @@ using namespace std;
 //int main(int argc, char const *argv[])
 int main()
 {
+    cout << "CORRECT COMPILER & EXECUTE!!!!" << endl;
     //   +-----------------------------------------------+
     //   |Usa este main para todas las pruebas que decees|
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
-    clock_t now, finish;
-    Mat img;
-    Mat tmp;
-    
-    VideoCapture cap(0);
+    // clock_t now, finish;
+    // Mat img;
+    // Mat tmp;
 
-    cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
+    // VideoCapture cap(0);
 
-    PDI pdi(30, 1.0, 1.0);
+    // cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+    // cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
 
-    namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
+    // PDI pdi(30, 1.0, 1.0);
 
-    int brithness = 255;
-    int contrast = 300;
-    int gamma = 100;
-    //Create trackbars in "Control" window
-    cvCreateTrackbar("brithness", "Control", &brithness, 510);
-    cvCreateTrackbar("contrast", "Control", &contrast, 1000);
-    cvCreateTrackbar("gamma", "Control", &gamma, 500);
+    // namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
+    // int brithness = 255;
+    // int contrast = 300;
+    // int gamma = 100;
 
+    // cvCreateTrackbar("brithness", "Control", &brithness, 510);
+    // cvCreateTrackbar("contrast", "Control", &contrast, 1000);
+    // cvCreateTrackbar("gamma", "Control", &gamma, 500);
 
-    // Mat src = imread("patron.png");
-    // Mat tmpA;
-    // Mat tmpA2;
-    // cvtColor(src, tmpA, CV_RGB2GRAY);
-    // GaussianBlur(tmpA, tmpA2, Size(5, 5), 5, 10);
-    // tmpA = tmpA2;
+    // vector<vector<Point> > contours;
+    // vector<vector<double> > momentsHu;
 
-    // Canny(tmpA, tmpA2, 200, 255, 3);
-    // tmpA = tmpA2;
-
-    // imshow("TestA", tmpA);
-
-    // vector<vector<Point> > contoursA;
-    // vector<Vec4i> hierarchyA;
-
-    // findContours(tmpA, contoursA, 
-    //                   hierarchyA, 
-    //                   CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
-    //                   CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
-    //                   Point(0, 0));
-    // while(true)
-    // {#include "MODEL/Manager_File.h"
+    // while (true)
+    // {
     //     now = clock();
 
     //     cap >> img;
-    //     //imshow("Original", img);
 
     //     pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
-    //     tmp =  pdi.preImprovement(img);
-    //     imshow("preImprovement", tmp);
+    //     tmp = pdi.preImprovement(img);
+    //     imshow("Test", tmp);
 
     //     tmp = pdi.convertColorSpace(tmp);
-    //     tmp =  pdi.secImprovement(tmp);
+    //     contours.clear();
+    //     contours = pdi.segmentation(tmp);
 
-    //     tmp = pdi.segmentation(tmp, contoursA);
-    //     imshow("Test", tmp);
+    //     momentsHu.clear();
+    //     momentsHu = pdi.characteristic(contours);
+
 
     //     if(waitKey(1) >= 0)
     //     {
@@ -88,9 +72,38 @@ int main()
     //     finish = clock();
 
     //     cout << "FPS:\t" << CLOCKS_PER_SEC / (finish - now) << endl;
+
+    //     for (size_t i = 0; i < momentsHu.size(); i++)
+    //     {
+    //         cout << endl;
+    //         cout << "Moment: " << i << endl;
+    //         for (size_t j = 0; j < momentsHu[i].size(); j++)
+    //         {
+    //             cout << momentsHu[i][j] << endl;
+    //         }
+    //     }
     // }
 
-    Clasificator clasificador;
+    vector<vector<double> > prueba(1);
+    prueba[0].push_back(1.0);
+    prueba[0].push_back(1.0);
+    prueba[0].push_back(2.0);
+    prueba[0].push_back(1.0);
+    prueba[0].push_back(3.0);
+    prueba[0].push_back(2.0);
+    prueba[0].push_back(1.0);
+
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(2.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(2.0);
+    // prueba[1].push_back(1.0);
+
+    Clasificator clasificator;
+
+    cout << clasificator.distanceMin(prueba, 7.0) << endl;
 
     return 0;
 }
