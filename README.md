@@ -3,8 +3,8 @@ Trabajo de grado, Interprete de Lenguaje de Señas Colombiano
 
 
 Usado
+* C++ 4.9.2
 * OpenCV 2.4.11
-* Qt 5.5
 
 Plataforma
 * Linux - LinuxMint 17.1
