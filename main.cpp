@@ -84,26 +84,30 @@ int main()
     //     }
     // }
 
-    vector<vector<double> > prueba(1);
-    prueba[0].push_back(1.0);
-    prueba[0].push_back(1.0);
-    prueba[0].push_back(2.0);
-    prueba[0].push_back(1.0);
-    prueba[0].push_back(3.0);
-    prueba[0].push_back(2.0);
-    prueba[0].push_back(1.0);
+    vector<vector<double> > prueba(2);
 
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(2.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(2.0);
-    // prueba[1].push_back(1.0);
+    prueba[0].push_back(2.0);
+    prueba[0].push_back(3.0);
+    prueba[0].push_back(4.0);
+    prueba[0].push_back(5.0);
+    prueba[0].push_back(6.0);
+    prueba[0].push_back(7.0);
+    prueba[0].push_back(12.0);
+
+    prueba[1].push_back(1.0);
+    prueba[1].push_back(1.0);
+    prueba[1].push_back(2.0);
+    prueba[1].push_back(1.0);
+    prueba[1].push_back(1.0);
+    prueba[1].push_back(2.0);
+    prueba[1].push_back(1.0);
 
     Clasificator clasificator;
 
-    cout << clasificator.distanceMin(prueba, 7.0) << endl;
+    for (size_t i = 0; i < prueba.size(); i++)
+    {
+        cout << clasificator.distanceMin(prueba[i], 7.0) << endl;
+    }
 
     return 0;
 }
