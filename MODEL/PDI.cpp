@@ -48,6 +48,7 @@ Mat PDI::preImprovement(Mat img)
 
     tmp.convertTo(tmp, -1, contrast, brightness);
 
+    imshow("Improvement", tmp);
     return tmp;
 }
 

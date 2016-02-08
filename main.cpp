@@ -8,9 +8,12 @@
 #include <opencv2/opencv.hpp>
 
 //Nuestras Librerias
-#include "MODEL/Clasificator.h"
-#include "MODEL/Manager_File.h"
-#include "MODEL/PDI.h"
+
+#include "CONTROL/Interpretar_Controlador.h"
+
+// #include "MODEL/Clasificator.h"
+// #include "MODEL/Manager_File.h"
+// #include "MODEL/PDI.h"
 
 using namespace std;
 
@@ -22,6 +25,49 @@ int main()
     //   |Usa este main para todas las pruebas que decees|
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
+
+    VideoCapture cap(0);
+
+    cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
+
+    Mat img;
+
+    Interpretar_Controlador interControl;
+    string tmp;
+
+    namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
+
+    int brithness = 255;
+    int contrast = 300;
+    int gamma = 100;
+    int sen = 70;
+
+    cvCreateTrackbar("brithness", "Control", &brithness, 510);
+    cvCreateTrackbar("contrast", "Control", &contrast, 1000);
+    cvCreateTrackbar("gamma", "Control", &gamma, 500);
+    cvCreateTrackbar("sensibilidad", "Control", &sen, 1000);
+
+    while (true)
+    {
+        cap >> img;
+
+        imshow("Original", img);
+
+        tmp = "";
+        tmp = interControl.interpretar(img, brithness, 
+                                            contrast, 
+                                            gamma, 
+                                            sen / 7.0);
+        cout << tmp << endl;
+
+        if(waitKey(1) >= 0)
+        {
+            break;
+        }
+    }
+
+
     // clock_t now, finish;
     // Mat img;
     // Mat tmp;
@@ -31,7 +77,7 @@ int main()
     // cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
     // cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
 
-    // PDI pdi(30, 1.0, 1.0);
+    // // PDI pdi(30, 1.0, 1.0);
 
     // namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
@@ -84,30 +130,30 @@ int main()
     //     }
     // }
 
-    vector<vector<double> > prueba(2);
+    // vector<vector<double> > prueba(2);
 
-    prueba[0].push_back(2.0);
-    prueba[0].push_back(3.0);
-    prueba[0].push_back(4.0);
-    prueba[0].push_back(5.0);
-    prueba[0].push_back(6.0);
-    prueba[0].push_back(7.0);
-    prueba[0].push_back(12.0);
+    // prueba[0].push_back(2.0);
+    // prueba[0].push_back(3.0);
+    // prueba[0].push_back(4.0);
+    // prueba[0].push_back(5.0);
+    // prueba[0].push_back(6.0);
+    // prueba[0].push_back(7.0);
+    // prueba[0].push_back(12.0);
 
-    prueba[1].push_back(1.0);
-    prueba[1].push_back(1.0);
-    prueba[1].push_back(2.0);
-    prueba[1].push_back(1.0);
-    prueba[1].push_back(1.0);
-    prueba[1].push_back(2.0);
-    prueba[1].push_back(1.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(2.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(1.0);
+    // prueba[1].push_back(2.0);
+    // prueba[1].push_back(1.0);
 
-    Clasificator clasificator;
+    // Clasificator clasificator;
 
-    for (size_t i = 0; i < prueba.size(); i++)
-    {
-        cout << clasificator.distanceMin(prueba[i], 7.0) << endl;
-    }
+    // for (size_t i = 0; i < prueba.size(); i++)
+    // {
+    //     cout << clasificator.distanceMin(prueba[i], 7.0) << endl;
+    // }
 
     return 0;
 }

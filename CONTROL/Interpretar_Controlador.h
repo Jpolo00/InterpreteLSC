@@ -1,34 +1,38 @@
 #ifndef INTERPRETAR_CONROLADOR_H
 #define INTERPRETAR_cLASIFICADOR_H
 
-#include <Clasificator.h>
-#include <PDI.h>
 #include <string>
-#include <iostream>
 #include <vector>
-#include <math.h>
+#include <iostream>
+
+#include <cv.h>
+#include <opencv2/opencv.hpp>
+
+#include <MODEL/Clasificator.h>
+#include <MODEL/PDI.h>
 
 using namespace std;
 
 class Interpretar_Controlador
 {
 
-private:
-	int item;
-	vector<vector<double> patternLetters;
-	vector<string> characters;
-	vector<double> pattern;
-	Clasificator clasificador;
-	PDI pdi;
+    private:
+        Clasificator clasificator;
+        PDI pdi;
+        Mat tmp;
 
-public:
-	Interpretar_Controlador();
-	~Interpretar_Controlador();
-	void cargarAbecedario(string path);
-	void setPattern(Mat img);
-	void calcularDistancia(vector<double> pattern);
-	string retornarLetra();
-	
+        vector<vector<Point> > contours;
+        vector<vector<double> > momentsHu;
+
+        string character;
+
+    public:
+        Interpretar_Controlador();
+        ~Interpretar_Controlador();
+        string interpretar(Mat imgint, int brithness, 
+                                       double contrast, 
+                                       double gamma, 
+                                       double alpha);
 };
 
 #endif
