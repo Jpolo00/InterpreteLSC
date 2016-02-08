@@ -9,7 +9,7 @@
 
 //Nuestras Librerias
 
-#include "CONTROL/Interpretar_Controlador.h"
+#include <CONTROL/Interpret.h>
 
 // #include "MODEL/Clasificator.h"
 // #include "MODEL/Manager_File.h"
@@ -33,7 +33,7 @@ int main()
 
     Mat img;
 
-    Interpretar_Controlador interControl;
+    Interpret interpret;
     string tmp;
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
@@ -55,7 +55,7 @@ int main()
         imshow("Original", img);
 
         tmp = "";
-        tmp = interControl.interpretar(img, brithness, 
+        tmp = interpret.interpretSing(img, brithness, 
                                             contrast, 
                                             gamma, 
                                             sen / 7.0);

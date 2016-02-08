@@ -1,5 +1,5 @@
-#ifndef INTERPRETAR_CONROLADOR_H
-#define INTERPRETAR_cLASIFICADOR_H
+#ifndef INTERPRET_H
+#define INTERPRET_H
 
 #include <string>
 #include <vector>
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class Interpretar_Controlador
+class Interpret
 {
 
     private:
@@ -27,9 +27,9 @@ class Interpretar_Controlador
         string character;
 
     public:
-        Interpretar_Controlador();
-        ~Interpretar_Controlador();
-        string interpretar(Mat imgint, int brithness, 
+        Interpret();
+        ~Interpret();
+        string interpretSing(Mat imgint, int brithness, 
                                        double contrast, 
                                        double gamma, 
                                        double alpha);

@@ -1,16 +1,16 @@
-#include "Interpretar_Controlador.h"
+#include "Interpret.h"
 
-Interpretar_Controlador::Interpretar_Controlador() 
+Interpret::Interpret() 
 {
     pdi.setCaliber(30, 1.0, 1.0);
 }
 
-Interpretar_Controlador::~Interpretar_Controlador() {}
+Interpret::~Interpret() {}
 
-string Interpretar_Controlador::interpretar(Mat img, int brithness, 
-                                                     double contrast, 
-                                                     double gamma, 
-                                                     double alpha)
+string Interpret::interpretSing(Mat img, int brithness, 
+                                       double contrast, 
+                                       double gamma, 
+                                       double alpha)
 {
     pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
     tmp = pdi.preImprovement(img);
