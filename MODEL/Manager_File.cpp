@@ -1,4 +1,4 @@
-#include "Manager_File.h"
+#include <MODEL/Manager_File.h>
 
 Manager_File::Manager_File(){}
 Manager_File::~Manager_File(){}
@@ -18,29 +18,34 @@ void Manager_File::createFile(string name,
     File.close();
 }
 
+void Manager_File::addNewPattern(string character)
+{
+    string tmp = "MODEL/PATRONES/Load.conf";
+
+    ofstream File (tmp.c_str(), ios_base::app);
+
+    File << character << endl;
+
+    File.close();
+}
+
 vector<string> Manager_File::loadFile(string name, string path)
 {
     string tmp = path + name;
     string line;
-    int sizeVector = 1;
 
     ifstream File (tmp.c_str());
+
     if(! File.is_open())
     {
         cout << "File " << tmp << " no found..."<<endl;
     }
 
-    data.resize(sizeVector);
+    data.clear();
 
     while (getline(File, line))
     {
-        getline(File, line);
-        if (line != "/")
-        {
-            data[sizeVector - 1] = line;
-            sizeVector ++;
-            data.resize(sizeVector);
-        }
+        data.push_back(line);
     }
 
     return data;

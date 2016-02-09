@@ -1,39 +1,67 @@
-//Comentado porque no me dejo compilar :3, perdon Kelly :3
-/*#include "Clasificator.h"
+#include <MODEL/Clasificator.h>
 
-Clasificator::Clasificator(){}
-Clasificator::~Clasificator(){}
+Clasificator::Clasificator() {}
+Clasificator::~Clasificator() {}
 
-void Clasificator::distanciaEuclidiana(vector<double> caracteristicas, vector<double> modelo){
-		
-		double temp=0.0;
-		for (int i = 0; i < caracteristicas.size(); i++)
-		{	
-			temp += pow(caracteristicas[i]- modelo[i],2);
-			
-		}
-		distEuclidiana.push_back(sqrt(temp));
+void Clasificator::distanceEuclidean(vector<double> characteristic)
+{
+    euclideanDist.clear();
+
+        for (size_t i = 0; i < momentsHu.size(); i++)
+        {
+            tmp = 0.0;
+
+            for (size_t j = 0; j < momentsHu[i].size(); j++)
+            {
+                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
+            }
+            euclideanDist.push_back(sqrt(tmp));
+        }
 }
 
-int Clasificator::distanciaMinima(vector<double> distancia){
-	int posicion = 0;
-	double distMinima = distancia[0];
+void Clasificator::loadPatterns()
+{
+    vector<string> filesPatron;
+    vector<string> dataFiles;
 
-	for (int i = 1; i < distancia.size(); i++){
+    filesPatron = manager.loadFile("Load.conf", "MODEL/PATRONES/");
 
-		if (distMinima > distancia[i])
-		{
-			distMinima = distancia[i];
-			posicion=i;
-		}else{
-			posicion=0;
-		}
-	}
+    for (size_t i = 0; i < filesPatron.size(); i++)
+    {
+        momentsHu.resize(filesPatron.size());
+        dataFiles = manager.loadFile(filesPatron[i], "MODEL/PATRONES/");
 
-	return posicion;
+        character.push_back(dataFiles[0]);
+
+        for (size_t j = 1; j < dataFiles.size(); j++)
+        {
+            momentsHu[i].push_back(atof(dataFiles[j].c_str()));
+        }
+    }
 }
 
-string Clasificator::getCaracter(vector<string> caracterPatron, int item){
-	string letra = caracterPatron[item];
-	return letra;
-} */
+string Clasificator::distanceMin(vector<double> characteristic, 
+                                 double threshold)
+{
+    distanceEuclidean(characteristic);
+
+    tmp = euclideanDist[0];
+    size_t index = 0;
+    string answer = "No Found";
+
+    for (size_t i = 1; i < euclideanDist.size(); i++)
+    {
+        if (tmp > euclideanDist[i])
+        {
+            tmp = euclideanDist[i];
+            index = i;
+        }
+    }
+
+    if (euclideanDist[index] <= threshold)
+    {
+        answer = character[index];
+    }
+
+    return answer;
+}

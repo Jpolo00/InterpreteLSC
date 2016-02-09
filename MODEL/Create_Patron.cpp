@@ -1,26 +1,46 @@
-#include "Create_Patron.h"
+#include <MODEL/Create_Patron.h>
 
-Create_Patron::Create_Patron(int numV, string letra)
-	this->numVectors=numVectors;
-	this->letter=letter;
-}
-Create_Patron::~Create_Patron(){}
+Create_Patron::Create_Patron() {}
+Create_Patron::~Create_Patron() {}
 
-
-void Create_Patron::addVectors(vector<double> patron)
+void Create_Patron::addVector(vector<double> moment)
 {
-   sinNombre.push_back(patron);
+    momentsHu.push_back(moment);
 }
 
-void Create_Patron::createPattern()
+void Create_Patron::setCharacter(string character)
 {
-	double temp=0.0;
-	for(int i=0; i<7; i++){
-		for(int j=0; j<sinNombre.size(); j++){
-			temp += sinNombre[j][i];
-		}
-		int aux= temp/sinNombre.size();
-		patron.push_back(aux);
-		temp=0.0;
-	}
+    this->character = character;
+}
+
+void Create_Patron::average()
+{
+    double tmp = 0.0;
+    pattern.clear();
+
+    pattern.push_back(character);
+
+    for (size_t j = 0; j < momentsHu[0].size(); j++)
+    {
+        tmp = 0.0;
+
+        for (size_t i = 0; i < momentsHu.size(); i++)
+        {
+            tmp += momentsHu[i][j] / (momentsHu[i].size() * 1.0);
+        }
+
+        tostring << tmp;
+
+        pattern.push_back(tostring.str());
+
+        tostring.str("");
+    }
+
+    momentsHu.clear();
+}
+
+void Create_Patron::createPatron()
+{
+    manager.createFile(character+".patron", "MODEL/PATRONES/", pattern);
+    manager.addNewPattern(character+".patron");
 }

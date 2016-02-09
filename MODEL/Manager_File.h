@@ -23,12 +23,8 @@ class Manager_File
                         string path, 
                         vector<string> data);
 
+        void addNewPattern(string character);
+
         vector<string> loadFile(string name, string path);
-        vector<string> loadFile(string name);
-
-        void setPath(string path);
-        string getPath();
-
-        vector<string> getData();
 };
 #endif
