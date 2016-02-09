@@ -1,4 +1,4 @@
-#include "Clasificator.h"
+#include <MODEL/Clasificator.h>
 
 Clasificator::Clasificator()
 {

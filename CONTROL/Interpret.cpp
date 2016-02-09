@@ -1,4 +1,4 @@
-#include "Interpret.h"
+#include <CONTROL/Interpret.h>
 
 Interpret::Interpret() 
 {
