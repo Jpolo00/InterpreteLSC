@@ -10,6 +10,7 @@ rm -f app
 echo -e "\e[1;32mCompilando \e[0m"
  g++ -I/usr/local/include/opencv \
      -I/usr/local/include/opencv2 \
+     -I/home/kelly/Documentos/Repositorio/InterpreteLSC \
      -L/usr/local/lib/ \
      -W -Wall -g -o app *.cpp  MODEL/*.cpp CONTROL/*.cpp VIEW/*.cpp \
                         -lopencv_core -lopencv_imgproc -lopencv_highgui \
