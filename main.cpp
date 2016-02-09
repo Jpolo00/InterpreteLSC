@@ -11,9 +11,7 @@
 
 #include <CONTROL/Interpret.h>
 
-// #include "MODEL/Clasificator.h"
-// #include "MODEL/Manager_File.h"
-// #include "MODEL/PDI.h"
+#include <MODEL/Create_Patron.h>
 
 using namespace std;
 
@@ -26,48 +24,66 @@ int main()
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-    VideoCapture cap(0);
+    // VideoCapture cap(0);
 
-    cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
+    // cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
+    // cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
 
-    Mat img;
+    // Mat img;
 
-    Interpret interpret;
-    string tmp;
+    // Interpret interpret;
+    // string tmp;
 
-    namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
+    // namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
-    int brithness = 255;
-    int contrast = 300;
-    int gamma = 100;
-    int sen = 70;
+    // int brithness = 255;
+    // int contrast = 300;
+    // int gamma = 100;
+    // int sen = 70;
 
-    cvCreateTrackbar("brithness", "Control", &brithness, 510);
-    cvCreateTrackbar("contrast", "Control", &contrast, 1000);
-    cvCreateTrackbar("gamma", "Control", &gamma, 500);
-    cvCreateTrackbar("sensibilidad", "Control", &sen, 1000);
+    // cvCreateTrackbar("brithness", "Control", &brithness, 510);
+    // cvCreateTrackbar("contrast", "Control", &contrast, 1000);
+    // cvCreateTrackbar("gamma", "Control", &gamma, 500);
+    // cvCreateTrackbar("sensibilidad", "Control", &sen, 1000);
 
-    while (true)
-    {
-        cap >> img;
+    // while (true)
+    // {
+    //     cap >> img;
 
-        imshow("Original", img);
+    //     imshow("Original", img);
 
-        tmp = "";
-        tmp = interpret.interpretSing(img, brithness, 
-                                            contrast, 
-                                            gamma, 
-                                            sen / 7.0);
-        cout << tmp << endl;
+    //     tmp = "";
+    //     tmp = interpret.interpretSing(img, brithness, 
+    //                                         contrast, 
+    //                                         gamma, 
+    //                                         sen / 7.0);
+    //     cout << tmp << endl;
 
-        if(waitKey(1) >= 0)
-        {
-            break;
-        }
-    }
+    //     if(waitKey(1) >= 0)
+    //     {
+    //         break;
+    //     }
+    // }
+//-----------------------------------
+    vector<double> prueba;
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
+    prueba.push_back(0.1);
 
-
+    Create_Patron createPatron;
+    createPatron.setCharacter("Q");
+    createPatron.addVector(prueba);
+    createPatron.addVector(prueba);
+    createPatron.addVector(prueba);
+    createPatron.addVector(prueba);
+    createPatron.addVector(prueba);
+    createPatron.average();
+    createPatron.createPatron();
+//-----------------------------------
     // clock_t now, finish;
     // Mat img;
     // Mat tmp;

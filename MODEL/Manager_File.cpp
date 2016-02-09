@@ -18,6 +18,17 @@ void Manager_File::createFile(string name,
     File.close();
 }
 
+void Manager_File::addNewPattern(string character)
+{
+    string tmp = "MODEL/PATRONES/Load.conf";
+
+    ofstream File (tmp.c_str(), ios_base::app);
+
+    File << character << endl;
+
+    File.close();
+}
+
 vector<string> Manager_File::loadFile(string name, string path)
 {
     string tmp = path + name;

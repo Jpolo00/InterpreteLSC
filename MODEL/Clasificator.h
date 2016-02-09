@@ -26,6 +26,7 @@ class Clasificator
     public:
         Clasificator();
         ~Clasificator();
+        void loadPatterns();
         string distanceMin(vector<double> characteristic, 
                            double threshold);
 };

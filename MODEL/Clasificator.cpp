@@ -1,6 +1,25 @@
 #include <MODEL/Clasificator.h>
 
-Clasificator::Clasificator()
+Clasificator::Clasificator() {}
+Clasificator::~Clasificator() {}
+
+void Clasificator::distanceEuclidean(vector<double> characteristic)
+{
+    euclideanDist.clear();
+
+        for (size_t i = 0; i < momentsHu.size(); i++)
+        {
+            tmp = 0.0;
+
+            for (size_t j = 0; j < momentsHu[i].size(); j++)
+            {
+                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
+            }
+            euclideanDist.push_back(sqrt(tmp));
+        }
+}
+
+void Clasificator::loadPatterns()
 {
     vector<string> filesPatron;
     vector<string> dataFiles;
@@ -19,24 +38,6 @@ Clasificator::Clasificator()
             momentsHu[i].push_back(atof(dataFiles[j].c_str()));
         }
     }
-}
-
-Clasificator::~Clasificator(){}
-
-void Clasificator::distanceEuclidean(vector<double> characteristic)
-{
-    euclideanDist.clear();
-
-        for (size_t i = 0; i < momentsHu.size(); i++)
-        {
-            tmp = 0.0;
-
-            for (size_t j = 0; j < momentsHu[i].size(); j++)
-            {
-                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
-            }
-            euclideanDist.push_back(sqrt(tmp));
-        }
 }
 
 string Clasificator::distanceMin(vector<double> characteristic, 
