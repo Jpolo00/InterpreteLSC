@@ -10,10 +10,8 @@
 //Nuestras Librerias
 
 #include <CONTROL/Interpret.h>
-<<<<<<< HEAD
 #include <CONTROL/Patron.h>
-=======
->>>>>>> f13b8bdbd5b1cad4a6bddf89499752326e186555
+
 
 #include <MODEL/Create_Patron.h>
 
@@ -27,7 +25,6 @@ int main()
     //   |Usa este main para todas las pruebas que decees|
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
-<<<<<<< HEAD
 
      VideoCapture cap(0);
 
@@ -86,10 +83,6 @@ int main()
     }
 //-----------------------------------
 
-
-
-=======
-
     // VideoCapture cap(0);
 
     // cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
@@ -131,25 +124,24 @@ int main()
     //     }
     // }
 //-----------------------------------
-    vector<double> prueba;
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
-    prueba.push_back(0.1);
+    // vector<double> prueba;
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
+    // prueba.push_back(0.1);
 
-    Create_Patron createPatron;
-    createPatron.setCharacter("Q");
-    createPatron.addVector(prueba);
-    createPatron.addVector(prueba);
-    createPatron.addVector(prueba);
-    createPatron.addVector(prueba);
-    createPatron.addVector(prueba);
-    createPatron.average();
-    createPatron.createPatron();
->>>>>>> f13b8bdbd5b1cad4a6bddf89499752326e186555
+    // Create_Patron createPatron;
+    // createPatron.setCharacter("Q");
+    // createPatron.addVector(prueba);
+    // createPatron.addVector(prueba);
+    // createPatron.addVector(prueba);
+    // createPatron.addVector(prueba);
+    // createPatron.addVector(prueba);
+    // createPatron.average();
+    // createPatron.createPatron();
 //-----------------------------------
     // clock_t now, finish;
     // Mat img;
