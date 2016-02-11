@@ -6,6 +6,15 @@ Create_Patron::~Create_Patron() {}
 void Create_Patron::addVector(vector<double> moment)
 {
     momentsHu.push_back(moment);
+
+    // for (size_t i = 0; i < momentsHu.size(); i++)
+    // {
+    //     cout << "Momento: " << i << endl;
+    //     for (size_t j = 0; j < momentsHu[i].size(); j++)
+    //     {
+    //         cout << momentsHu[i][j] << endl;
+    //     }
+    // }
 }
 
 void Create_Patron::setCharacter(string character)

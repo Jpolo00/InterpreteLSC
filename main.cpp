@@ -26,7 +26,7 @@ int main()
     //   |puedes usar el Script_Execute_App.sh           |
     //   +-----------------------------------------------+
 
-     VideoCapture cap(0);
+     VideoCapture cap(1);
 
      cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
      cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
@@ -51,34 +51,36 @@ int main()
 
      c.setCharacter("K");
 
-    while (true)
+     bool t = true;
+
+    //img = imread("patron.jpg");
+
+    while (t)
     {
         cap >> img;
 
         imshow("Original", img);
+        c.drawContour(img, brithness, contrast, gamma);
 
-        if(waitKey(1)== 32){
-            c.addPattern(img, brithness, contrast, gamma);
-            c.create();
-        }
-
-        else if(waitKey(1)==48){
-            c.create();
-            cout<<"crear"<<endl;
-        }
-
-
-
-        //tmp = "";
-        //tmp = interpret.interpretSing(img, brithness, 
-          //                                  contrast, 
-            //                                gamma, 
-              //                              sen / 7.0);
-        //cout << tmp << endl;
-
-        else if(waitKey(1) == 27)
+        switch(waitKey(1))
         {
-            break;
+            case 65:
+            case 97:
+            {
+                c.create();
+                break;
+            }
+            case 32:
+            {
+                c.addPattern();
+                t = false;
+                break;
+            }
+            case 27:
+            {
+                t = false;
+                break;
+            }
         }
     }
 //-----------------------------------
@@ -123,26 +125,7 @@ int main()
     //         break;
     //     }
     // }
-//-----------------------------------
-    // vector<double> prueba;
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
-    // prueba.push_back(0.1);
 
-    // Create_Patron createPatron;
-    // createPatron.setCharacter("Q");
-    // createPatron.addVector(prueba);
-    // createPatron.addVector(prueba);
-    // createPatron.addVector(prueba);
-    // createPatron.addVector(prueba);
-    // createPatron.addVector(prueba);
-    // createPatron.average();
-    // createPatron.createPatron();
-//-----------------------------------
     // clock_t now, finish;
     // Mat img;
     // Mat tmp;
@@ -204,31 +187,5 @@ int main()
     //         }
     //     }
     // }
-
-    // vector<vector<double> > prueba(2);
-
-    // prueba[0].push_back(2.0);
-    // prueba[0].push_back(3.0);
-    // prueba[0].push_back(4.0);
-    // prueba[0].push_back(5.0);
-    // prueba[0].push_back(6.0);
-    // prueba[0].push_back(7.0);
-    // prueba[0].push_back(12.0);
-
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(2.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(1.0);
-    // prueba[1].push_back(2.0);
-    // prueba[1].push_back(1.0);
-
-    // Clasificator clasificator;
-
-    // for (size_t i = 0; i < prueba.size(); i++)
-    // {
-    //     cout << clasificator.distanceMin(prueba[i], 7.0) << endl;
-    // }
-
     return 0;
 }

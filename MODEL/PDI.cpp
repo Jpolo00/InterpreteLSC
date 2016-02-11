@@ -54,22 +54,38 @@ Mat PDI::preImprovement(Mat img)
 
 vector<vector<Point> > PDI::segmentation(Mat img)
 {
-    tmp = groupColorRang(img);
+    //tmp = groupColorRang(img);
     threshold(tmp, tmp2, 128, 255, THRESH_BINARY); //THRESH_BINARY_INV
     tmp = tmp2;
 
-    dilate(tmp, tmp2, element);
+    cvtColor(tmp, tmp2, CV_RGB2GRAY);
     tmp = tmp2;
-    erode(tmp, tmp2, element);
+    threshold(tmp, tmp2, 100, 255, THRESH_BINARY);
     tmp = tmp2;
 
-    // medianBlur(tmp, tmp2, 3);
-    // tmp = tmp2;
+    // imshow("Thres", tmp);
+
+    //medianBlur(tmp, tmp2, 3);
+    medianBlur(tmp, tmp2, 7);
+    tmp = tmp2;
 
     // GaussianBlur(tmp, tmp2, Size(5, 5), 5, 10);
     // tmp = tmp2;
 
-    Canny(tmp, tmp2, 200, 255, 3);
+
+    // dilate(tmp, tmp2, element);
+    // tmp = tmp2;
+    // dilate(tmp, tmp2, element);
+    // tmp = tmp2;
+    // erode(tmp, tmp2, element);
+    // tmp = tmp2;
+    // erode(tmp, tmp2, element);
+    // tmp = tmp2;
+
+    imshow("Erode- Dilate", tmp);
+
+    //Canny(tmp, tmp2, 200, 255, 3);
+    Canny(tmp, tmp2, 50, 200, 3);
     tmp = tmp2;
 
     imshow("Canny", tmp);
@@ -82,6 +98,25 @@ vector<vector<Point> > PDI::segmentation(Mat img)
                       CV_RETR_CCOMP, //CV_RETR_TREE, //CV_RETR_EXTERNAL, //CV_RETR_LIST 
                       CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
+
+    vector<vector<Point> > contours2(1);
+
+    for (size_t i = 0; i < contours.size(); i++)
+    {
+        if (arcLength(contours[i], false) >= 200.0)
+        {
+            for (size_t j = 0; j < contours[i].size(); j++)
+            {
+                contours2[0].push_back(contours[i][j]);
+            }
+        }
+    }
+
+    Mat drawing = Mat::zeros(tmp.size(), CV_8UC3);
+
+    drawContours(drawing, contours2, 0, Scalar(255, 0, 0), 1, 8, hierarchy, 0, Point());
+
+    imshow("contorno", drawing);
 
     return contours;
 }
@@ -113,12 +148,14 @@ vector<vector<double> > PDI::characteristic(vector<vector<Point> > contours)
 
     for (size_t i = 0; i < contours.size(); i++)
     {
+        cout << "Momentos Hu PDI: "<< endl;
         mnts = moments(contours[i]);
         HuMoments(mnts, momentsHu);
 
         for (size_t j = 0; j < 7; j++)
         {
-            arrayMomentsHu[i].push_back(momentsHu[i]);
+            cout << "Momentos Hu PDI: " << momentsHu[j] << endl;
+            arrayMomentsHu[i].push_back(momentsHu[j]);
         }
     }
 

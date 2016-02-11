@@ -13,22 +13,29 @@
 
 using namespace std;
 
-class Patron {
+class Patron
+{
 
-	private:
-		Create_Patron createPattern;
-		PDI pdi;
-		Mat tmp;
-		vector<vector<Point> > contours;
+    private:
+        Create_Patron createPattern;
+        PDI pdi;
+
+        Mat tmp;
+        Mat drawing;
+
+        vector<vector<Point> > contours;
+        vector<Vec4i> hierarchy;
         vector<vector<double> > momentsHu;
 
-	public:
-		Patron();
-		~Patron();
-		void addPattern(Mat img,int brithness, double contrast, double gamma);
-		void setCharacter(string character);
-		void create();
+    public:
+        Patron();
+        ~Patron();
+        //void addPattern(Mat img,int brithness, double contrast, double gamma);
+        void addPattern();
+        void setCharacter(string character);
+        void create();
 
+        void drawContour(Mat img,int brithness, double contrast, double gamma);
 };
 
 #endif

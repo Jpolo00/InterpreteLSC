@@ -30,9 +30,11 @@ class PDI
         Mat matColorRang[1];
 
         //Scalar colorRang[2] = {Scalar(0, 0, 45), Scalar(25, 160, 245)}; //Color Rang 1
-        Scalar colorRang[2] = {Scalar(0, 50, 0), Scalar(40, 255, 255)}; //Color Rang 2
+        //Scalar colorRang[2] = {Scalar(0, 50, 0), Scalar(40, 255, 255)}; //Color Rang 2
+        Scalar colorRang[2] = {Scalar(0, 50, 100), Scalar(30, 240, 255)}; //Color Rang 3
 
         vector<vector<Point> > contours;
+        vector<vector<Point> > contours2;
         vector<Vec4i> hierarchy;
         vector<vector<double> > arrayMomentsHu;
 
