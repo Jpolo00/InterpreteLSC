@@ -7,6 +7,11 @@ Interpret::Interpret()
 
 Interpret::~Interpret() {}
 
+void Interpret::updatePattern()
+{
+    clasificator.loadPatterns();
+}
+
 string Interpret::interpretSing(Mat img, int brithness, 
                                        double contrast, 
                                        double gamma, 
@@ -17,19 +22,14 @@ string Interpret::interpretSing(Mat img, int brithness,
     tmp = pdi.convertColorSpace(tmp);
     contours.clear();
     contours = pdi.segmentation(tmp);
+    contours = pdi.filterContours(contours);
     momentsHu.clear();
     momentsHu = pdi.characteristic(contours);
 
     character = "";
     for (size_t i = 0; i < momentsHu.size(); i++)
     {
-        // cout << endl;
-        // cout << "Contour: " << i << endl;
-        // for(size_t j = 0; j < momentsHu[i].size(); j++)
-        // {
-        //     cout << momentsHu[i][j] << endl;
-        // }
-        character += clasificator.distanceMin(momentsHu[i], alpha);
+        character += clasificator.distanceMin(momentsHu, alpha);
     }
 
     return character;

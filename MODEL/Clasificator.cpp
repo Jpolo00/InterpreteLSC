@@ -3,22 +3,6 @@
 Clasificator::Clasificator() {}
 Clasificator::~Clasificator() {}
 
-void Clasificator::distanceEuclidean(vector<double> characteristic)
-{
-    euclideanDist.clear();
-
-        for (size_t i = 0; i < momentsHu.size(); i++)
-        {
-            tmp = 0.0;
-
-            for (size_t j = 0; j < momentsHu[i].size(); j++)
-            {
-                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
-            }
-            euclideanDist.push_back(sqrt(tmp));
-        }
-}
-
 void Clasificator::loadPatterns()
 {
     vector<string> filesPatron;
@@ -40,6 +24,23 @@ void Clasificator::loadPatterns()
     }
 }
 
+void Clasificator::distanceEuclidean(vector<double> characteristic)
+{
+    euclideanDist.clear();
+
+        for (size_t i = 0; i < momentsHu.size(); i++)
+        {
+            tmp = 0.0;
+
+            for (size_t j = 0; j < momentsHu[i].size(); j++)
+            {
+                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
+            }
+
+            euclideanDist.push_back(sqrt(tmp));
+        }
+}
+
 string Clasificator::distanceMin(vector<double> characteristic, 
                                  double threshold)
 {
@@ -58,7 +59,12 @@ string Clasificator::distanceMin(vector<double> characteristic,
         }
     }
 
-    if (euclideanDist[index] <= threshold)
+    for (size_t i = 0; i < euclideanDist.size(); i++)
+    {
+        cout << euclideanDist[i] << endl;
+    }
+
+    //if (euclideanDist[index] <= threshold)
     {
         answer = character[index];
     }

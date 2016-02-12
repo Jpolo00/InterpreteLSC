@@ -14,7 +14,7 @@ void Patron::addPattern()
     // momentsHu.clear();
     // momentsHu = pdi.characteristic(contours);
 
-    createPattern.addVector(momentsHu[0]);
+    createPattern.addVector(momentsHu);
 }
 
 void Patron::setCharacter(string character){
@@ -34,6 +34,7 @@ void Patron::drawContour(Mat img, int brithness, double contrast, double gamma)
     tmp = pdi.convertColorSpace(tmp);
     contours.clear();
     contours = pdi.segmentation(tmp);
+    contours = pdi.filterContours(contours);
     momentsHu.clear();
     momentsHu = pdi.characteristic(contours);
 }

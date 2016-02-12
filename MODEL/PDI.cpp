@@ -48,13 +48,14 @@ Mat PDI::preImprovement(Mat img)
 
     tmp.convertTo(tmp, -1, contrast, brightness);
 
-    imshow("Improvement", tmp);
+    //imshow("Improvement", tmp);
     return tmp;
 }
 
 vector<vector<Point> > PDI::segmentation(Mat img)
 {
     //tmp = groupColorRang(img);
+    tmp = img;
     threshold(tmp, tmp2, 128, 255, THRESH_BINARY); //THRESH_BINARY_INV
     tmp = tmp2;
 
@@ -99,7 +100,18 @@ vector<vector<Point> > PDI::segmentation(Mat img)
                       CV_CHAIN_APPROX_SIMPLE, //CV_CHAIN_APPROX_TC89_KCOS, //CV_CHAIN_APPROX_TC89_L1, //CV_CHAIN_APPROX_NONE, 
                       Point(0, 0));
 
-    vector<vector<Point> > contours2(1);
+    return contours;
+}
+
+vector<vector<Point> > PDI::filterContours(vector<vector<Point> > contours)
+{
+    contours2.clear();
+    contours2.resize(0);
+
+    if(!contours.empty())
+    {
+        contours2.resize(1);
+    }
 
     for (size_t i = 0; i < contours.size(); i++)
     {
@@ -112,13 +124,12 @@ vector<vector<Point> > PDI::segmentation(Mat img)
         }
     }
 
-    Mat drawing = Mat::zeros(tmp.size(), CV_8UC3);
-
+    drawing = Mat::zeros(tmp.size(), CV_8UC3);
     drawContours(drawing, contours2, 0, Scalar(255, 0, 0), 1, 8, hierarchy, 0, Point());
 
     imshow("contorno", drawing);
 
-    return contours;
+    return contours2;
 }
 
 Mat PDI::groupColorRang(Mat img)
@@ -141,21 +152,28 @@ Mat PDI::groupColorRang(Mat img)
     return tmp;
 }
 
-vector<vector<double> > PDI::characteristic(vector<vector<Point> > contours)
+vector<double> PDI::characteristic(vector<vector<Point> > contours)
 {
     arrayMomentsHu.clear();
-    arrayMomentsHu.resize(contours.size());
 
-    for (size_t i = 0; i < contours.size(); i++)
+    try
     {
-        cout << "Momentos Hu PDI: "<< endl;
-        mnts = moments(contours[i]);
-        HuMoments(mnts, momentsHu);
+        for (size_t i = 0; i < contours.size(); i++)
+        {
+            mnts = moments(contours[i]);
+            HuMoments(mnts, momentsHu);
 
+            for (size_t j = 0; j < 7; j++)
+            {
+                arrayMomentsHu.push_back(momentsHu[j]);
+            }
+        }
+    }
+    catch(...)
+    {
         for (size_t j = 0; j < 7; j++)
         {
-            cout << "Momentos Hu PDI: " << momentsHu[j] << endl;
-            arrayMomentsHu[i].push_back(momentsHu[j]);
+            arrayMomentsHu.push_back(0);
         }
     }
 

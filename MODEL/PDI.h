@@ -28,6 +28,7 @@ class PDI
         //Mat element = getStructuringElement(MORPH_ELLIPSE, Size(7, 7)); //Option 2
         Mat element = getStructuringElement(MORPH_ELLIPSE, Size(5, 5)); //Option 2
         Mat matColorRang[1];
+        Mat drawing;
 
         //Scalar colorRang[2] = {Scalar(0, 0, 45), Scalar(25, 160, 245)}; //Color Rang 1
         //Scalar colorRang[2] = {Scalar(0, 50, 0), Scalar(40, 255, 255)}; //Color Rang 2
@@ -36,7 +37,8 @@ class PDI
         vector<vector<Point> > contours;
         vector<vector<Point> > contours2;
         vector<Vec4i> hierarchy;
-        vector<vector<double> > arrayMomentsHu;
+
+        vector<double> arrayMomentsHu;
 
         Moments mnts;
 
@@ -56,7 +58,8 @@ class PDI
                         double gamma);
         Mat convertColorSpace(Mat img);
         Mat preImprovement(Mat img);
+        vector<vector<Point> > filterContours(vector<vector<Point> > contours);
         vector<vector<Point> > segmentation(Mat img);
-        vector<vector<double> > characteristic(vector<vector<Point> > contours);
+        vector<double> characteristic(vector<vector<Point> > contours);
 };
 #endif

@@ -22,13 +22,14 @@ class Interpret
         Mat tmp;
 
         vector<vector<Point> > contours;
-        vector<vector<double> > momentsHu;
+        vector<double> momentsHu;
 
         string character;
 
     public:
         Interpret();
         ~Interpret();
+        void updatePattern();
         string interpretSing(Mat imgint, int brithness, 
                                        double contrast, 
                                        double gamma, 

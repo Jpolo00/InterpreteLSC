@@ -25,12 +25,11 @@ class Patron
 
         vector<vector<Point> > contours;
         vector<Vec4i> hierarchy;
-        vector<vector<double> > momentsHu;
+        vector<double> momentsHu;
 
     public:
         Patron();
         ~Patron();
-        //void addPattern(Mat img,int brithness, double contrast, double gamma);
         void addPattern();
         void setCharacter(string character);
         void create();
