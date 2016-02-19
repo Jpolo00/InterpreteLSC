@@ -19,6 +19,7 @@ string Interpret::interpretSing(Mat img, int brithness,
 {
     pdi.setCaliber(brithness - 255, contrast / 300.0, gamma / 100.0);
     tmp = pdi.preImprovement(img);
+    imshow("Mejora", tmp);
     tmp = pdi.convertColorSpace(tmp);
     contours.clear();
     contours = pdi.segmentation(tmp);
@@ -26,11 +27,18 @@ string Interpret::interpretSing(Mat img, int brithness,
     momentsHu.clear();
     momentsHu = pdi.characteristic(contours);
 
-    character = "";
+    cout << "Momentos Hu" << endl;
+
     for (size_t i = 0; i < momentsHu.size(); i++)
     {
-        character += clasificator.distanceMin(momentsHu, alpha);
+        cout << momentsHu[i] << endl;
     }
+
+    cout << endl;
+    cout << endl;
+
+    character = "";
+    character += clasificator.distanceMin(momentsHu, alpha);
 
     return character;
 }

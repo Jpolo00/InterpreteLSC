@@ -61,7 +61,7 @@ string Clasificator::distanceMin(vector<double> characteristic,
 
     for (size_t i = 0; i < euclideanDist.size(); i++)
     {
-        cout << euclideanDist[i] << endl;
+        cout <<character[i]<<"\t"<<euclideanDist[i] << endl;
     }
 
     //if (euclideanDist[index] <= threshold)
