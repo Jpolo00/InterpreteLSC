@@ -15,7 +15,7 @@ class Clasificator
 {
     private:
         vector<string> character;
-        vector<vector<double> > momentsHu;
+        vector<vector<double> > dist;
         vector<double> euclideanDist;
         double tmp;
 
@@ -27,8 +27,7 @@ class Clasificator
         Clasificator();
         ~Clasificator();
         void loadPatterns();
-        string distanceMin(vector<double> characteristic, 
-                           double threshold);
+        string distanceMin(vector<double> characteristic);
 };
 
 #endif

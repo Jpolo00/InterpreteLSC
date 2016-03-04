@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 #include <MODEL/Manager_File.h>
 
@@ -16,7 +17,7 @@ class Create_Patron
         string character;
          ostringstream tostring;
 
-        vector<vector<double> > momentsHu;
+        vector<vector<double> > distAll;
         vector<string> pattern;
 
         Manager_File manager;
@@ -25,7 +26,7 @@ class Create_Patron
         Create_Patron();
         ~Create_Patron();
         void setCharacter(string character);
-        void addVector(vector<double> moments);
+        void addVector(vector<double> dist);
         void average();
         void createPatron();
 };

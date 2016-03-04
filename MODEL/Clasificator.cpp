@@ -12,14 +12,14 @@ void Clasificator::loadPatterns()
 
     for (size_t i = 0; i < filesPatron.size(); i++)
     {
-        momentsHu.resize(filesPatron.size());
+        dist.resize(filesPatron.size());
         dataFiles = manager.loadFile(filesPatron[i], "MODEL/PATRONES/");
 
         character.push_back(dataFiles[0]);
 
         for (size_t j = 1; j < dataFiles.size(); j++)
         {
-            momentsHu[i].push_back(atof(dataFiles[j].c_str()));
+            dist[i].push_back(atof(dataFiles[j].c_str()));
         }
     }
 }
@@ -28,21 +28,41 @@ void Clasificator::distanceEuclidean(vector<double> characteristic)
 {
     euclideanDist.clear();
 
-        for (size_t i = 0; i < momentsHu.size(); i++)
+    size_t sizeVector = 0;
+    size_t sizeCaracter = 0;
+
+    sizeCaracter = characteristic.size();
+
+    for (size_t i = 0; i < dist.size(); i++)
+    {
+        tmp = 0.0;
+        sizeVector = dist[i].size();
+
+        if (sizeVector > sizeCaracter)
         {
-            tmp = 0.0;
-
-            for (size_t j = 0; j < momentsHu[i].size(); j++)
+            for (size_t j = 0;  j < (sizeVector - sizeCaracter); j++)
             {
-                tmp += pow(characteristic[j]- momentsHu[i][j], 2);
+                characteristic.push_back(0.0);
             }
-
-            euclideanDist.push_back(sqrt(tmp));
         }
+        else
+        {
+            for (size_t j = 0;  j < (sizeCaracter - sizeVector); j++)
+            {
+                dist[i].push_back(0.0);
+            }
+        }
+
+        for (size_t j = 0; j < dist[i].size(); j++)
+        {
+            tmp += pow(characteristic[j]- dist[i][j], 2);
+        }
+
+        euclideanDist.push_back(sqrt(tmp));
+    }
 }
 
-string Clasificator::distanceMin(vector<double> characteristic, 
-                                 double threshold)
+string Clasificator::distanceMin(vector<double> characteristic)
 {
     distanceEuclidean(characteristic);
 
@@ -64,10 +84,7 @@ string Clasificator::distanceMin(vector<double> characteristic,
         cout <<character[i]<<"\t"<<euclideanDist[i] << endl;
     }
 
-    //if (euclideanDist[index] <= threshold)
-    {
-        answer = character[index];
-    }
+    answer = character[index];
 
     return answer;
 }

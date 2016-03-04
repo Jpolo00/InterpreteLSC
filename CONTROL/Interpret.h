@@ -21,8 +21,7 @@ class Interpret
         PDI pdi;
         Mat tmp;
 
-        vector<vector<Point> > contours;
-        vector<double> momentsHu;
+        vector<double> dist;
 
         string character;
 
@@ -32,8 +31,7 @@ class Interpret
         void updatePattern();
         string interpretSing(Mat imgint, int brithness, 
                                        double contrast, 
-                                       double gamma, 
-                                       double alpha);
+                                       double gamma);
 };
 
 #endif

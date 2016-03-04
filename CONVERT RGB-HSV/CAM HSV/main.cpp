@@ -7,7 +7,7 @@ using namespace std;
 
  int main( int argc, char** argv )
  {
-    VideoCapture cap(0); //capture the video from web cam
+    VideoCapture cap(1); //capture the video from web cam
 
     if ( !cap.isOpened() )  // if not success, exit program
     {
@@ -54,6 +54,7 @@ using namespace std;
     Mat imgHSV;
 
    cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
+   imshow("HSVas", imgHSV);
  
   Mat imgThresholded;
 

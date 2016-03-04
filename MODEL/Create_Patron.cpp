@@ -3,18 +3,10 @@
 Create_Patron::Create_Patron() {}
 Create_Patron::~Create_Patron() {}
 
-void Create_Patron::addVector(vector<double> moment)
+void Create_Patron::addVector(vector<double> dist)
 {
-    momentsHu.push_back(moment);
-
-    // for (size_t i = 0; i < momentsHu.size(); i++)
-    // {
-    //     cout << "Momento: " << i << endl;
-    //     for (size_t j = 0; j < momentsHu[i].size(); j++)
-    //     {
-    //         cout << momentsHu[i][j] << endl;
-    //     }
-    // }
+    distAll.push_back(dist);
+    cout << "Agregado" << endl;
 }
 
 void Create_Patron::setCharacter(string character)
@@ -26,26 +18,18 @@ void Create_Patron::average()
 {
     double tmp = 0.0;
     pattern.clear();
-
     pattern.push_back(character);
 
-    for (size_t j = 0; j < momentsHu[0].size(); j++)
+    for (size_t i = 0; i < distAll[0].size(); i++)
     {
-        tmp = 0.0;
-
-        for (size_t i = 0; i < momentsHu.size(); i++)
-        {
-            tmp += momentsHu[i][j] / (momentsHu[i].size() * 1.0);
-        }
-
+        tmp = distAll[0][i];
         tostring << tmp;
-
         pattern.push_back(tostring.str());
-
         tostring.str("");
+
     }
 
-    momentsHu.clear();
+    distAll.clear();
 }
 
 void Create_Patron::createPatron()

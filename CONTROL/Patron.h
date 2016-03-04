@@ -21,11 +21,7 @@ class Patron
         PDI pdi;
 
         Mat tmp;
-        Mat drawing;
-
-        vector<vector<Point> > contours;
-        vector<Vec4i> hierarchy;
-        vector<double> momentsHu;
+        vector<double> dist;
 
     public:
         Patron();
@@ -34,7 +30,6 @@ class Patron
         void setCharacter(string character);
         void create();
 
-        void drawContour(Mat img,int brithness, double contrast, double gamma);
+        void setImg(Mat img,int brithness, double contrast, double gamma);
 };
-
 #endif
