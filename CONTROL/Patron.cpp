@@ -7,7 +7,16 @@ Patron::~Patron(){}
 void Patron::addPattern()
 {
     dist = pdi.getDist();
-    createPattern.addVector(dist);
+
+    if (dist.size() != 0)
+    {
+        createPattern.addVector(dist);
+    }
+    else
+    {
+        cout << "No Agregado" << endl;
+        cout << "Sin Contorno" << endl;
+    }
 }
 
 void Patron::setCharacter(string character)

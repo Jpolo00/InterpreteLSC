@@ -29,8 +29,8 @@ class PDI
         Mat element = getStructuringElement(MORPH_ELLIPSE, Size(5, 5));
         Mat tmp;
         Mat tmp2;
+        Mat segmentation;
         Mat rot;
-        Mat gray;
 
         vector<size_t> itemX;
         vector<size_t> itemY;
@@ -70,7 +70,6 @@ class PDI
         vector<Vec4i> getHierarchy();
         vector<Point2f> rectImg(vector<Point> point);
         vector<vector<Point> > getContours();
-
         vector<double> getDist();
 };
 #endif

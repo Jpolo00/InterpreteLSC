@@ -15,19 +15,19 @@ class Clasificator
 {
     private:
         vector<string> character;
-        vector<vector<double> > dist;
-        vector<double> euclideanDist;
+        vector<vector<double> > model;
+        vector<double> distModel;
         double tmp;
 
         Manager_File manager;
 
-        void distanceEuclidean(vector<double> characteristic);
+        double distanceEuclidean(double num1, double num2);
 
     public:
         Clasificator();
         ~Clasificator();
         void loadPatterns();
-        string distanceMin(vector<double> characteristic);
+        string dtw(vector<double> characteristic);
 };
 
 #endif
