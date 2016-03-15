@@ -29,6 +29,15 @@ void Manager_File::addNewPattern(string character)
     File.close();
 }
 
+bool Manager_File::checkFile(string path)
+{
+    ifstream File (path.c_str());
+    bool check = File.is_open();
+    File.close();
+
+    return check;
+}
+
 vector<string> Manager_File::loadFile(string name, string path)
 {
     string tmp = path + name;
@@ -47,6 +56,8 @@ vector<string> Manager_File::loadFile(string name, string path)
     {
         data.push_back(line);
     }
+
+    File.close();
 
     return data;
 }

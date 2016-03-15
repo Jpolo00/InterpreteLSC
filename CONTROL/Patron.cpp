@@ -26,7 +26,7 @@ void Patron::setCharacter(string character)
 
 void Patron::create()
 {
-    createPattern.average();
+    createPattern.format();
     createPattern.createPatron();
 }
 

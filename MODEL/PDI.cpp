@@ -159,7 +159,6 @@ vector<Point> PDI::filterContours(double threshold)
         }
     }
 
-
     return pointClear;
 }
 
@@ -240,7 +239,6 @@ void PDI::setContours(Mat img)
 
     cvtColor(img, tmp, CV_BGR2GRAY);
     threshold(tmp, tmp2, 128, 255, THRESH_BINARY);
-    imshow("segmentada", tmp2);
     tmp = tmp2;
 
     medianBlur(tmp, tmp2, 3);
@@ -254,8 +252,6 @@ void PDI::setContours(Mat img)
     Canny(tmp, tmp2, 50, 200, 3);
     tmp = tmp2;
     rot = tmp2;
-
-    imshow("Canny", tmp);
 
     findContours(tmp, contours, 
                  hierarchy, 
@@ -277,7 +273,7 @@ void PDI::setContours(Mat img)
     drawContours(segmentation, drawPoint, 0, Scalar(255), 1, 8, 
                  hierarchy, 0, Point());
 
-    imshow("filtrado2", segmentation);
+    imshow("Canny", segmentation);
 
     try
     {
@@ -326,19 +322,6 @@ void PDI::setContours(Mat img)
         {
             dist.push_back(distPoint(rectPoint[4], point[i]));
         }
-        // drawPoint.clear();
-        // drawPoint.resize(1);
-
-        // for (size_t i = 0; i < point.size(); i++)
-        // {
-        //     drawPoint[0].push_back(point[i]);
-        // }
-        // segmentation = Mat::zeros(tmp.size(), CV_8UC3);
-        // drawContours(segmentation, drawPoint, 0, Scalar(0, 255, 0), 1, 8, 
-        //              hierarchy, 0, Point());
-        // circle(segmentation, rectPoint[4], 50, Scalar(0, 0, 255), 1, 8);
-
-        // imshow("rotate", segmentation);
     }
     catch(...){}
 }

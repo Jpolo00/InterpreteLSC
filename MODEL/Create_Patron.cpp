@@ -5,7 +5,7 @@ Create_Patron::~Create_Patron() {}
 
 void Create_Patron::addVector(vector<double> dist)
 {
-    distAll.push_back(dist);
+    distModel = dist;
     cout << "Agregado" << endl;
 }
 
@@ -14,26 +14,37 @@ void Create_Patron::setCharacter(string character)
     this->character = character;
 }
 
-void Create_Patron::average()
+void Create_Patron::format()
 {
     double tmp = 0.0;
     pattern.clear();
     pattern.push_back(character);
 
-    for (size_t i = 0; i < distAll[0].size(); i++)
+    for (size_t i = 0; i < distModel.size(); i++)
     {
-        tmp = distAll[0][i];
+        tmp = distModel[i];
         tostring << tmp;
         pattern.push_back(tostring.str());
         tostring.str("");
-
     }
 
-    distAll.clear();
+    distModel.clear();
 }
 
 void Create_Patron::createPatron()
 {
-    manager.createFile(character+".patron", "MODEL/PATRONES/", pattern);
-    manager.addNewPattern(character+".patron");
+    size_t i = 0;
+    tostring.str("");
+    tostring << i;
+    string file = character + tostring.str();
+    while (manager.checkFile("MODEL/PATRONES/"+file+".patron"))
+    {
+        i++;
+        tostring.str("");
+        tostring << i;
+        file = character + tostring.str();
+    }
+
+    manager.createFile(file+".patron", "MODEL/PATRONES/", pattern);
+    manager.addNewPattern(file+".patron");
 }

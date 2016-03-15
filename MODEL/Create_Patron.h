@@ -15,9 +15,10 @@ class Create_Patron
 {
     private:
         string character;
-         ostringstream tostring;
+        string file;
+        ostringstream tostring;
 
-        vector<vector<double> > distAll;
+        vector<double> distModel;
         vector<string> pattern;
 
         Manager_File manager;
@@ -27,7 +28,7 @@ class Create_Patron
         ~Create_Patron();
         void setCharacter(string character);
         void addVector(vector<double> dist);
-        void average();
+        void format();
         void createPatron();
 };
 #endif

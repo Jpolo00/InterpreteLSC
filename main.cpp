@@ -11,7 +11,6 @@
 
 #include <CONTROL/Interpret.h>
 #include <CONTROL/Patron.h>
-// #include <MODEL/PDI.h>
 
 using namespace std;
 
@@ -19,7 +18,7 @@ int main()
 {
     cout << "CORRECT COMPILER & EXECUTE!!!!" << endl;
 
-    VideoCapture cap(1);
+    VideoCapture cap(0);
 
     cap.set(CV_CAP_PROP_FRAME_WIDTH,320);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT, 210);
@@ -43,10 +42,10 @@ int main()
 
     interpret.updatePattern();
 
+    tmp = "";
     while (t)
     {
         cap >> img;
-        tmp = "";
 
         patron.setImg(img, brithness, contrast, gamma);
 
@@ -64,6 +63,7 @@ int main()
             {
                 patron.create();
                 interpret.updatePattern();
+                cout << "Agregado al Modelo" << endl;
                 break;
             }
             case 71:

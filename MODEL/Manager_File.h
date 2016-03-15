@@ -24,6 +24,7 @@ class Manager_File
                         vector<string> data);
 
         void addNewPattern(string character);
+        bool checkFile(string path);
 
         vector<string> loadFile(string name, string path);
 };
