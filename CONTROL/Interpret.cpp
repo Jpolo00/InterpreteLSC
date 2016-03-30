@@ -19,6 +19,7 @@ string Interpret::interpretSing(Mat img, int brithness,
     pdi.setCaliber(brithness, contrast, gamma);
     tmp = pdi.preImprovement(img);
     imshow("Control", tmp);
+
     pdi.setContours(tmp);
     dist = pdi.getDist();
 

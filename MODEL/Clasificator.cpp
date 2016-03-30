@@ -10,6 +10,8 @@ void Clasificator::loadPatterns()
 
     filesPatron = manager.loadFile("Load.conf", "MODEL/PATRONES/");
 
+    model.clear();
+
     for (size_t i = 0; i < filesPatron.size(); i++)
     {
         model.resize(filesPatron.size());
@@ -35,13 +37,20 @@ string Clasificator::dtw(vector<double> characteristic)
     size_t n = characteristic.size();
     size_t modelSize = model.size();
     double index[model.size()];
+    vector<vector<double> > cost;
 
     for (size_t k = 0; k < modelSize; k++)
     {
         distModel = model[k];
         size_t m = distModel.size();
 
-        double cost[m][n];
+        cost.clear;
+        cost.resize(m);
+        for (size_t i = 0; i < m; i++)
+        {
+            cost[i].resize(n);
+        }
+
         cost[0][0] = distanceEuclidean(distModel[0], characteristic[0]);
 
         for(size_t i = 1; i < m; i++)

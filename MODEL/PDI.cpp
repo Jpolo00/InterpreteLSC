@@ -234,54 +234,55 @@ Mat PDI::cutImg(Mat img, Point p1, Point p2)
 
 void PDI::setContours(Mat img)
 {
-    contours.clear();
-    hierarchy.clear();
-
-    cvtColor(img, tmp, CV_BGR2GRAY);
-    threshold(tmp, tmp2, 128, 255, THRESH_BINARY);
-    tmp = tmp2;
-
-    medianBlur(tmp, tmp2, 3);
-    tmp = tmp2;
-
-    dilate(tmp, tmp2, element);
-    tmp = tmp2;
-    erode(tmp, tmp2, element);
-    tmp = tmp2;
-
-    Canny(tmp, tmp2, 50, 200, 3);
-    tmp = tmp2;
-    rot = tmp2;
-
-    findContours(tmp, contours, 
-                 hierarchy, 
-                 CV_RETR_CCOMP,
-                 CV_CHAIN_APPROX_SIMPLE,
-                 Point(0, 0));
-
-    point = filterContours(200.0);
-
-    segmentation = Mat::zeros(img.size(), CV_8UC1);
-    vector<vector<Point> > drawPoint;
-    drawPoint.clear();
-    drawPoint.resize(1);
-    for (size_t i = 0; i < point.size(); i++)
-    {
-        drawPoint[0].push_back(point[i]);
-    }
-
-    drawContours(segmentation, drawPoint, 0, Scalar(255), 1, 8, 
-                 hierarchy, 0, Point());
-
-    imshow("Canny", segmentation);
-
     try
     {
+        contours.clear();
+        hierarchy.clear();
+
+        cvtColor(img, tmp, CV_BGR2GRAY);
+        threshold(tmp, tmp2, 128, 255, THRESH_BINARY);
+        tmp = tmp2;
+
+        medianBlur(tmp, tmp2, 3);
+        tmp = tmp2;
+
+        dilate(tmp, tmp2, element);
+        tmp = tmp2;
+        erode(tmp, tmp2, element);
+        tmp = tmp2;
+
+        Canny(tmp, tmp2, 50, 200, 3);
+        tmp = tmp2;
+        rot = tmp2;
+
+        findContours(tmp, contours, 
+                     hierarchy, 
+                     CV_RETR_CCOMP,
+                     CV_CHAIN_APPROX_SIMPLE,
+                     Point(0, 0));
+
+        point = filterContours(200.0);
+
+        segmentation = Mat::zeros(img.size(), CV_8UC1);
+        vector<vector<Point> > drawPoint;
+        drawPoint.clear();
+        drawPoint.resize(1);
+        for (size_t i = 0; i < point.size(); i++)
+        {
+            drawPoint[0].push_back(point[i]);
+        }
+
+        drawContours(segmentation, drawPoint, 0, Scalar(255), 1, 8, 
+                     hierarchy, 0, Point());
+
+        imshow("Canny", segmentation);
+
         point = filterContours(0.1);
         rectPoint = rectImg(point);
 
         pointX.clear();
         pointY.clear();
+
 
         for (size_t i = 0; i < point.size(); i++)
         {
@@ -323,7 +324,10 @@ void PDI::setContours(Mat img)
             dist.push_back(distPoint(rectPoint[4], point[i]));
         }
     }
-    catch(...){}
+    catch(...)
+    {
+        dist.clear();
+    }
 }
 
 vector<vector<Point> > PDI::getContours()
