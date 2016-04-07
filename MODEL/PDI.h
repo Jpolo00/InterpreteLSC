@@ -18,6 +18,7 @@ class PDI
         double gamma;
         double angle;
         double m;
+        double distMax;
 
         vector<double> dist;
 

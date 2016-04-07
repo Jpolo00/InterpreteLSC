@@ -44,7 +44,7 @@ string Clasificator::dtw(vector<double> characteristic)
         distModel = model[k];
         size_t m = distModel.size();
 
-        cost.clear;
+        cost.clear();
         cost.resize(m);
         for (size_t i = 0; i < m; i++)
         {

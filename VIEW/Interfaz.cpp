@@ -69,10 +69,13 @@ void Interfaz::vistaInterpretar()
 
     interpret.updatePattern();
 
+
     while (t)
     {
         cap >> img;
         patron.setImg(img, brithness, contrast, gamma);
+
+        //cout << waitKey(10) << endl;
 
         switch(waitKey(10))
         {
@@ -88,6 +91,10 @@ void Interfaz::vistaInterpretar()
             {
                 tmp += " ";
                 break;
+            }
+            case 127:
+            {
+                tmp = "";
             }
             case 27:
             {
