@@ -56,6 +56,7 @@ void Interfaz::vistaInterpretar()
     cout << "Presione Enter para interpretar la seña y" << endl;
     cout << "La tecla Espaciadora cuando termine de deletrear una " << endl;
     cout << "palabra" << endl;
+    cout << "Para borrar presione Tabulado (TAB)" << endl; 
     cout << "Para volver al menu principal precione Escape (ESC)" << endl;
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE);
@@ -69,13 +70,10 @@ void Interfaz::vistaInterpretar()
 
     interpret.updatePattern();
 
-
     while (t)
     {
         cap >> img;
         patron.setImg(img, brithness, contrast, gamma);
-
-        //cout << waitKey(10) << endl;
 
         switch(waitKey(10))
         {
@@ -92,9 +90,10 @@ void Interfaz::vistaInterpretar()
                 tmp += " ";
                 break;
             }
-            case 127:
+            case 65288:
             {
                 tmp = "";
+                break;
             }
             case 27:
             {
