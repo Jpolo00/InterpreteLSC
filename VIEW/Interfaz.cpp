@@ -28,6 +28,7 @@ void Interfaz::vistaPrincipal()
             cout << "1 ==> Interpretar Seña" << endl;
             cout << "2 ==> Agregar Seña" << endl;
             cout << "3 ==> Cerrar la Aplicación" <<endl;
+            cout << "Esperando Tecla..." <<endl;
             cin >> selection;
         }
         while (selection != "1" && 
@@ -54,10 +55,10 @@ void Interfaz::vistaInterpretar()
     cout << "| INTERPRETAR SEÑA | " << endl;
     cout << "+------------------+ \n" << endl;
     cout << "Presione Enter para interpretar la seña y" << endl;
-    cout << "La tecla Espaciadora cuando termine de deletrear una " << endl;
-    cout << "palabra" << endl;
-    cout << "Para borrar presione Tabulado (TAB)" << endl; 
+    cout << "Presione Espaciadora si desea agregar un espacio " << endl;
+    cout << "Presione Borrar (BackSpace) si desea borrar lo \n deletreado hasta el momento" << endl; 
     cout << "Para volver al menu principal precione Escape (ESC)" << endl;
+    cout << "Esperando Tecla..." <<endl;
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE);
     cvCreateTrackbar("brithness", "Control", &brithness, 510);
@@ -112,6 +113,7 @@ void Interfaz::vistaAgregar()
     cout << "2 ==> Escribir el nombre de la seña" << endl;
     cout << "3 ==> Guardar como Modelo"<< endl;
     cout << "Presiones Esc para volver atrás"<< endl;
+    cout << "Esperando Tecla..." <<endl;
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE);
     cvCreateTrackbar("brithness", "Control", &brithness, 510);
