@@ -111,7 +111,6 @@ void Interfaz::vistaAgregar()
     cout << "1 ==> Capturar Seña" << endl;
     cout << "2 ==> Escribir el nombre de la seña" << endl;
     cout << "3 ==> Guardar como Modelo"<< endl;
-    cout << "4 ==> Guardar como Modelo \n \n"<< endl;
     cout << "Presiones Esc para volver atrás"<< endl;
 
     namedWindow("Control", CV_WINDOW_AUTOSIZE);

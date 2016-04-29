@@ -5,6 +5,7 @@ Create_Patron::~Create_Patron() {}
 
 void Create_Patron::addVector(vector<double> dist)
 {
+    distModel.clear();
     distModel = dist;
     cout << "Agregado" << endl;
 }

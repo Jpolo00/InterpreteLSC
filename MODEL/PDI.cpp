@@ -333,7 +333,10 @@ void PDI::setContours(Mat img)
 
         for (size_t i = 0; i < dist.size(); i++)
         {
-            dist[i] /= distMax;
+            if (dist[i] / (distMax * 1.0) <= 1)
+            {
+                dist[i] = dist[i] / (distMax * 1.0);
+            }
         }
     }
     catch(...)

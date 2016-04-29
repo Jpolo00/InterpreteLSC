@@ -6,6 +6,7 @@ Patron::~Patron(){}
 
 void Patron::addPattern()
 {
+    dist.clear();
     dist = pdi.getDist();
 
     if (dist.size() != 0)
